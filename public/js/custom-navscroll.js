@@ -1,0 +1,1 @@
+$("a").on('click',function(event){if(this.hash!==""){event.preventDefault();var hash=this.hash;$('html, body').animate({scrollTop:$(hash).offset().top},800,function(){window.location.hash=hash;});}});$(window).scroll(function(){if($(window).scrollTop()>250){$('.tabs-navbar1').addClass('navbar-sticky')}else{$('.tabs-navbar1').removeClass('navbar-sticky')}});
