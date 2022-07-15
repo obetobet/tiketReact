@@ -49,7 +49,7 @@ export default function TopEventIndex() {
                         <div className="trend-image position-relative rounded">
                             <LazyLoadImage
                                 alt='image'
-                                effect="blur"
+                                effect="opacity"
                                 src="images/destination/destination2.jpg" />
                             <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
                             <div className="trend-content-title">

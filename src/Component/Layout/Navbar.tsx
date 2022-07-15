@@ -105,7 +105,26 @@ export class Navbarx extends React.Component {
                 Book Now
                 </a>
             </div>
-            <div id="slicknav-mobile" />
+            <div id="slicknav-mobile">
+                    <div className="slicknav_menu">
+                        <a href="#" aria-haspopup="true" tabIndex={0} className="slicknav_btn slicknav_collapsed" style={{outline: 'none'}}>
+                            <span className="slicknav_menutxt" ></span>
+                            <span className="slicknav_icon slicknav_no-text">
+                                <span className="slicknav_icon-bar"></span>
+                                <span className="slicknav_icon-bar"></span>
+                                <span className="slicknav_icon-bar"></span>
+                            </span>
+                        </a>
+                        <ul className="slicknav_nav slicknav_hidden" role="menu" aria-hidden="true" >    
+                            <li> <Link role="menuitem" tabIndex={-1} to="/">Home</Link></li>
+                            <li> <Link role="menuitem" tabIndex={-1} to="/about">About Us</Link></li>
+                            <li> <Link role="menuitem" tabIndex={-1} to="/event">Event</Link></li>
+                            <li> <Link role="menuitem" tabIndex={-1} to="/blog">Blog</Link></li>
+                            <li className="search-main"><a href="#search1" className="mt_search" role="menuitem" tabIndex={-1}><i className="fa fa-search" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
             </div>
         </div>
         </nav>

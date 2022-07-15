@@ -5,7 +5,8 @@ import RelatedEventIndex from './related_event';
 import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 type resultProps = {
     title: string;
@@ -64,8 +65,8 @@ export default function HomeIndex()  {
                           }}
                         slidesPerView={1}
                         modules={[Navigation, A11y,Autoplay]}
-                        spaceBetween={50}
                         pagination={{ clickable: true }}
+                        speed= {1000}
                         autoplay={{
                             delay: 7000,
                             disableOnInteraction: false,
@@ -78,16 +79,22 @@ export default function HomeIndex()  {
                     <div className="swiper-slide" >
 
                         <div className="slide-inner" >
-                            <div className="slide-image" 
+                            {/* <div className="slide-image" 
                             style={{ backgroundImage: `url(${value.gambar})` }}
-                            />
+                            /> */}
+                            {/* <img className="slide-image"  src={value.gambar}/> */}
+                            <LazyLoadImage
+                                alt='image'
+                                // className="slide-image" 
+                                // effect="opacity"
+                                src={value.gambar} />
                             <div className="dot-overlay" />
                         </div>
                     </div>
                 </SwiperSlide>
                     );
                 })}
-                <SwiperSlide >xx</SwiperSlide>
+                <SwiperSlide >x</SwiperSlide>
                         
             </Swiper>
                         
