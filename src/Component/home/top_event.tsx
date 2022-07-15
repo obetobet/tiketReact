@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 type resultProps = {
     title: string;
     location: string;
@@ -19,7 +20,7 @@ export default function TopEventIndex() {
         }
       });
       const jsonData = await data.json();
-      console.log(jsonData.results)
+    //   console.log(jsonData.results)
       setResult(jsonData.results);
     };
 
@@ -46,7 +47,10 @@ export default function TopEventIndex() {
                     <div className="col-lg-12 mb-4">
                         <div className="trend-item1">
                         <div className="trend-image position-relative rounded">
-                            <img src="images/destination/destination2.jpg" alt="image" />
+                            <LazyLoadImage
+                                alt='image'
+                                effect="blur"
+                                src="images/destination/destination2.jpg" />
                             <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
                             <div className="trend-content-title">
                                 <h5 className="mb-0">
@@ -64,12 +68,15 @@ export default function TopEventIndex() {
                         </div>
                         </div>
                     </div>
-                    {result.map((value) => {
+                    {result.map((value,i) => {
                         return (
-                    <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
+                    <div className="col-lg-6 col-md-6 col-sm-6 mb-4" key={i}>
                         <div className="trend-item1">
                         <div className="trend-image position-relative rounded">
-                            <img src={value.image} alt="image" />
+                            <LazyLoadImage
+                                    alt={value.image}
+                                    effect="blur"
+                                    src={value.image} />
                             <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100">
                             <div className="trend-content-title">
                                 <h5 className="mb-0">
@@ -94,7 +101,10 @@ export default function TopEventIndex() {
                 <div className="col-lg-5 mb-4">
                     <div className="trend-item1">
                     <div className="trend-image position-relative rounded">
-                        <img src="images/destination/destination1.jpg" alt="image" />
+                        <LazyLoadImage
+                                    alt="image"
+                                    effect="blur"
+                                    src="images/destination/destination1.jpg" />
                         <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
                         <div className="trend-content-title">
                             <h5 className="mb-0">
