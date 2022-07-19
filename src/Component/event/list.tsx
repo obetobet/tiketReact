@@ -1,6 +1,6 @@
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { useApiGet, TApiResponse } from '../../hooks/getapi';
+// import { useApiGet, TApiResponse } from '../../hooks/getapi';
 import React, { useState, useEffect } from "react";
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';
@@ -14,9 +14,9 @@ type EventProps = {
 }
 export const EventList = (props : EventProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
-  const data: TApiResponse = useApiGet(
-    'https://obet.pythonanywhere.com/v1/event/?limit=20'
-  );
+  // const data: TApiResponse = useApiGet(
+  //   'https://obet.pythonanywhere.com/v1/event/?limit=20'
+  // );
 
   
   // if (!data.loading) console.log(data.data);
