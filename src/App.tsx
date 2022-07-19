@@ -2,6 +2,7 @@
 import Favicon from 'react-favicon'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbarx from './Component/Layout/Navbar';
+
 import Footer from './Component/Layout/Footer';
 import HomeIndex from './Component/home/home';
 import Partner from './Component/home/partner';

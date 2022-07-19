@@ -1,11 +1,51 @@
-import React from 'react';
+
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-export default function EventList() {
+import { useApiGet, TApiResponse } from '../../hooks/getapi';
+import React, { useState, useEffect } from "react";
+import { translate } from '../../i18n';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import Moment from 'moment';
+type EventProps = {
+  title : string
+  judul : string
+
+
+}
+export const EventList = (props : EventProps) =>{
+  const { language } = useSelector((state: RootState) => state.lang);
+  const data: TApiResponse = useApiGet(
+    'https://obet.pythonanywhere.com/v1/event/?limit=20'
+  );
+
+  
+  // if (!data.loading) console.log(data.data);
+
+  const [result, setResult] = useState([]);
+  
+    useEffect(() => {
+    const api = async () => {
+      const data = await fetch("https://obet.pythonanywhere.com/v1/event/?limit=20", {
+        method: "GET",
+        headers: {
+            'Authorization':'token 836a53db3ee059632f06a84ce3cebbee78a030f2'
+        }
+      });
+      const jsonData = await data.json();
+      console.log(jsonData.results)
+      setResult(jsonData.results);
+    };
+
+    api();
+    }, []);
+
+    const formatDate = Moment().format("MMM Do YY");
+
   return (  
     <>
     <HelmetProvider>
               <Helmet>
-                <title>Halaman Event List</title>
+                <title>{props.title}</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
                 <meta
                     name="description"
@@ -19,101 +59,39 @@ export default function EventList() {
           <section className="trending pb-0 pt-6">
         <div className="container">
           <div className="section-title mb-6 w-50 mx-auto text-center">
-            <h4 className="mb-1 theme1">Top Destinations</h4>
-            <h2 className="mb-1">Explore <span className="theme">Top Destinations</span></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            {/* <h4 className="mb-1 theme1">Top Destinations</h4> */}
+            <h2 className="mb-1">{translate('event_list', language)}</h2>
+           
+            {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> */}
           </div>
           <div className="row align-items-center">
-            <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
-              <div className="trend-item1">
-                <div className="trend-image position-relative rounded">
-                  <img src="images/destination/destination17.jpg" alt="image" />
-                  <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                    <div className="trend-content-title">
-                      <h5 className="mb-0"><a href="destination-detail.html" className="theme1">Italy</a></h5>
-                      <h3 className="mb-0 white">Caspian Valley</h3>
+
+            {result.map((value :any ,i) => {
+                return (   
+                  <div className="col-lg-4 col-md-6 col-sm-6 mb-4" key={i}>
+                  <div className="trend-item1">
+                    <div className="trend-image position-relative rounded">
+                      <img src={value.image} alt="image" />
+                      <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                        <div className="trend-content-title">
+                          <h4 className="mb-0"><a href="#" className="theme1">{value.title}</a></h4>
+                          <h6 className="mb-0 white"><i className="icon-location-pin" />{value.location}</h6>
+                        </div>
+                        <span className="white bg-theme p-1 px-2 rounded">{Moment(value.date).format('DD/MMM/YY')}</span>
+                      </div>
+                      <div className="color-overlay" />
                     </div>
-                    <span className="white bg-theme p-1 px-2 rounded">18 Tours</span>
                   </div>
-                  <div className="color-overlay" />
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
-              <div className="trend-item1">
-                <div className="trend-image position-relative rounded">
-                  <img src="images/destination/destination14.jpg" alt="image" />
-                  <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                    <div className="trend-content-title">
-                      <h5 className="mb-0"><a href="destination-detail.html" className="theme1">Tokyo</a></h5>
-                      <h3 className="mb-0 white">Japan</h3>
-                    </div>
-                    <span className="white bg-theme p-1 px-2 rounded">21 Tours</span>
-                  </div>
-                  <div className="color-overlay" />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
-              <div className="trend-item1">
-                <div className="trend-image position-relative rounded">
-                  <img src="images/destination/destination15.jpg" alt="image" />
-                  <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100">
-                    <div className="trend-content-title">
-                      <h5 className="mb-0"><a href="destination-detail.html" className="theme1">Moscow</a></h5>
-                      <h3 className="mb-0 white">Russia</h3>
-                    </div>
-                    <span className="white bg-theme p-1 px-2 rounded">15 Tours</span>
-                  </div>
-                  <div className="color-overlay" />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
-              <div className="trend-item1">
-                <div className="trend-image position-relative rounded">
-                  <img src="images/destination/destination5.jpg" alt="image" />
-                  <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                    <div className="trend-content-title">
-                      <h5 className="mb-0"><a href="destination-detail.html" className="theme1">Bangkok</a></h5>
-                      <h3 className="mb-0 white">Thailand</h3>
-                    </div>
-                    <span className="white bg-theme p-1 px-2 rounded">24 Tours</span>
-                  </div>
-                  <div className="color-overlay" />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
-              <div className="trend-item1">
-                <div className="trend-image position-relative rounded">
-                  <img src="images/destination/destination16.jpg" alt="image" />
-                  <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                    <div className="trend-content-title">
-                      <h5 className="mb-0"><a href="destination-detail.html" className="theme1">Florida</a></h5>
-                      <h3 className="mb-0 white">America</h3>
-                    </div>
-                    <span className="white bg-theme p-1 px-2 rounded">32 Tours</span>
-                  </div>
-                  <div className="color-overlay" />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
-              <div className="trend-item1">
-                <div className="trend-image position-relative rounded">
-                  <img src="images/destination/destination4.jpg" alt="image" />
-                  <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                    <div className="trend-content-title">
-                      <h5 className="mb-0"><a href="destination-detail.html" className="theme1">Bali</a></h5>
-                      <h3 className="mb-0 white">Indonesia</h3>
-                    </div>
-                    <span className="white bg-theme p-1 px-2 rounded">14 Tours</span>
-                  </div>
-                  <div className="color-overlay" />
-                </div>
-              </div>
-            </div>
+                
+
+                  );
+            })}
+
+            
+
+
+            {/*  */}
             <div className="col-lg-4 col-md-6 col-sm-6 mb-4">
               <div className="trend-item1">
                 <div className="trend-image position-relative rounded">
