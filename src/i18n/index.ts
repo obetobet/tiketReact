@@ -6,7 +6,7 @@ export const translate = (key: string, language: string): string => {
 
   if(language === 'English') {
     langData = en;
-  }else if(language === 'Indonesia') {
+  }else {
     langData = id;
   }
 
