@@ -3,5 +3,35 @@
   "about": "About Us",
   "event": "Event",
   "blog": "Blog",
-  "event_list":"Event List"
+  "contact-us":"Contact Us",
+  "Privacy Policy":"Privacy Policy",
+  "Terms & Conditions":"Terms & Conditions",
+  "Helps":"Helps",
+  "Categories":"Categories",
+  "Newsletter":"Newsletter",
+
+
+  "Office Location":"Office Location",
+  "Phone Number":"Phone Number",
+  "Email Address":"Email Address",
+  "event_list":"Event List",
+  "faq":"Frequent Asked Questions",
+  "dyhaq":"Do You Have Any Questions ?",
+  "joinwith" :"Join with Us & Get the latest information from us",
+
+
+  "Subscribe":"Subscribe",
+  "Submit":"Submit",
+  "First Name":"First Name",
+  "Last Name":"Last Name",
+  "Email":"Email",
+  "Phone":"Phone",
+  "Enter a Message":"Enter a Message"
+
+
+
+  
+
+
+
 }

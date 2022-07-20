@@ -12,7 +12,7 @@ type resultProps = {
 export default function Partner()  {
     return (
         <>
-        <section className="our-partner pt-0 pb-5">
+        <section className="our-partner pt-0 pb-5" style={{padding:'0px'}}>
         <div className="container">
           <div className="section-title mb-6 w-75 mx-auto text-center">
             {/* <h4 className="mb-1 theme1">Our Partners</h4>    */}

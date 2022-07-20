@@ -3,5 +3,34 @@
   "about": "Tentang Kita",
   "event": "Acara",
   "blog": "Blog",
-  "event_list":"Daftar Acara"
+  "contact-us":"Hubungi kami",
+  "Privacy Policy":"Kebijakan pribadi",
+  "Terms & Conditions":"Syarat & Ketentuan",
+  "Helps":"Bantuan",
+  "Categories":"Kategori",
+  "Newsletter":"Buletin",
+  "News":"Berita",
+
+
+
+  "Office Location":"Lokasi Kantor",
+  "Phone Number":"Nomor Telepon",
+  "Email Address":"Alamat Email",
+  "event_list":"Daftar Acara",
+  "faq":"Pertanyaan yang Sering Diajukan",
+  "dyhaq":"Apakah Anda Memiliki Pertanyaan ?",
+  "joinwith" :"Bergabunglah bersama Kami & Dapatkan informasi terbaru dari kami",
+
+ 
+  "Subscribe":"Langganan",
+  "Submit":"Kirim",
+  "First Name":"Nama Depan",
+  "Last Name":"Nama Belakang",
+  "Email":"Email",
+  "Phone":"Telepon",
+  "Enter a Message":"Masukkan Pesan"
+
+
+
+  
 }

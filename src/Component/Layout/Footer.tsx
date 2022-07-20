@@ -1,21 +1,25 @@
 import React from 'react';
 import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { Navigation,A11y,Autoplay  } from 'swiper';
+import { Link,NavLink  } from 'react-router-dom';
 import 'swiper/css';
-// import { data } from '../../constants/global';
-export default class Footer extends React.Component {
-    render() {
-        return (
-          <>  
-            <footer
-  className="pt-20 pb-4"
-  style={{ backgroundImage: "url(images/background_pattern.png)" }}
->
+
+import { translate } from '../../i18n';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import ScrollButton from '../helpers/ScrollButton';
+export default function Footer () {
+  const { language } = useSelector((state: RootState) => state.lang);
+
+  return (
+    <>  
+  <footer className="pt-20 pb-4"
+    style={{ backgroundImage: "url(images/background_pattern.png)" }}>
   <div
     className="section-shape top-0"
     style={{ backgroundImage: "url(images/shape8.png)" }}
   />
-  <div className="insta-main pb-10">
+  {/* <div className="insta-main pb-10">
     <div className="container">
       <div className="insta-inner">
         <div className="follow-button">
@@ -48,7 +52,6 @@ export default class Footer extends React.Component {
                   },
                 
               }}
-            // slidesPerView={5}
             modules={[Autoplay]}
             pagination={{ clickable: true }}
             autoplay={{
@@ -132,7 +135,7 @@ export default class Footer extends React.Component {
         </div>
       </div>
     </div>
-  </div>
+  </div> */}
   <div className="footer-upper pb-4">
     <div className="container">
       <div className="row">
@@ -158,7 +161,6 @@ export default class Footer extends React.Component {
                   className="__cf_email__"
                   data-cfemail="f79e999198b7a3859681929b9e99d994989a"
                 >
-                  [email&nbsp;protected]
                 </a>
               </li>
               <li className="white">
@@ -169,32 +171,26 @@ export default class Footer extends React.Component {
         </div>
         <div className="col-lg-2 col-md-6 col-sm-12 mb-4">
           <div className="footer-links">
-            <h3 className="white">Quick link</h3>
+            <h3 className="white">{translate('Helps', language)}</h3>
             <ul>
               <li>
-                <a href="about-us.html">About Us</a>
+                <a href="about-us.html">{translate('Privacy Policy', language)}</a>
               </li>
               <li>
-                <a href="about-us.html">Delivery Information</a>
+                <a href="about-us.html">{translate('Terms & Conditions', language)}</a>
               </li>
               <li>
-                <a href="about-us.html">Privacy Policy</a>
+                <Link  to="/contact-us" >{translate('contact-us', language)}</Link>
               </li>
               <li>
-                <a href="about-us.html">Terms &amp; Conditions</a>
-              </li>
-              <li>
-                <a href="about-us.html">Customer Service</a>
-              </li>
-              <li>
-                <a href="#about-us.html">Return Policy</a>
+                  <Link  to="/faq" >Faq</Link>
               </li>
             </ul>
           </div>
         </div>
         <div className="col-lg-2 col-md-6 col-sm-12 mb-4">
           <div className="footer-links">
-            <h3 className="white">Categories</h3>
+            <h3 className="white">{translate('Categories', language)}</h3>
             <ul>
               <li>
                 <a href="about-us.html">Travel</a>
@@ -208,22 +204,15 @@ export default class Footer extends React.Component {
               <li>
                 <a href="about-us.html">Destinations</a>
               </li>
-              <li>
-                <a href="about-us.html">Entertainment</a>
-              </li>
-              <li>
-                <a href="about-us.html">Business</a>
-              </li>
             </ul>
           </div>
         </div>
         <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
           <div className="footer-links">
-            <h3 className="white">Newsletter</h3>
+            <h3 className="white">{translate('Newsletter', language)}</h3>
             <div className="newsletter-form ">
               <p className="mb-3">
-                Jin our community of over 200,000 global readers who receives
-                emails filled with news, promotions, and other good stuff.
+              {translate('joinwith', language)}
               </p>
               <form
                 action="#"
@@ -232,7 +221,7 @@ export default class Footer extends React.Component {
                 className="border-0 d-flex align-items-center"
               >
                 <input type="text" placeholder="Email Address" />
-                <button className="nir-btn ms-2">Subscribe</button>
+                <button className="nir-btn ms-2">{translate('Subscribe', language)}</button>
               </form>
             </div>
           </div>
@@ -276,6 +265,12 @@ export default class Footer extends React.Component {
   </div>
   <div id="particles-js" />
 </footer>
+
+<div id="wawax">
+  <a href="https://wa.me/6287886524614" target='_blank'></a>
+</div>
+<ScrollButton/>
+
 <div className="modal fade log-reg" id="exampleModal" tabIndex={-1} aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -379,5 +374,5 @@ export default class Footer extends React.Component {
       </div>
           </>
         )
-    }
+    
 }

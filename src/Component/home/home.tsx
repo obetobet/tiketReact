@@ -5,9 +5,12 @@ import RelatedEventIndex from './related_event';
 import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+
+import Navbarx from "../Layout/Navbar";
+import Footer from "../Layout/Footer";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { HomeList } from "./list";
+import Partner from "./partner";
 type resultProps = {
     title: string;
     gambar:string;
@@ -17,10 +20,6 @@ export default function HomeIndex()  {
     const swiperx = useSwiper();
     const navigationPrevRef = React.useRef<HTMLDivElement>(null)
     const navigationNextRef = React.useRef<HTMLDivElement>(null)
-
-    
-
-    
 
     const [result, setResult] = useState<resultProps[]>([]);
     useEffect(() => {
@@ -32,7 +31,6 @@ export default function HomeIndex()  {
         }
       });
       const jsonData = await data.json();
-      
       setResult(jsonData);
     };
 
@@ -43,7 +41,8 @@ export default function HomeIndex()  {
 
       return (
         <>  
-        <HelmetProvider>
+          <Navbarx/>
+            <HelmetProvider>
               <Helmet>
                 <title>HOME</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
@@ -53,7 +52,7 @@ export default function HomeIndex()  {
                   />
    
               </Helmet>
-          </HelmetProvider>
+            </HelmetProvider>
             <section className="banner overflow-hidden">
                 <div className="slider top50">
                     <div className="swiper-container">
@@ -64,12 +63,11 @@ export default function HomeIndex()  {
                             nextEl: navigationNextRef.current,
                           }}
                         slidesPerView={1}
-                        modules={[Navigation, A11y,Autoplay]}
-                        pagination={{ clickable: true }}
+                        modules={[Navigation,Autoplay]}
                         speed= {1000}
                         autoplay={{
                             delay: 7000,
-                            disableOnInteraction: false,
+                            // disableOnInteraction: false,
                           }}
                         
                         >
@@ -77,24 +75,16 @@ export default function HomeIndex()  {
                         return (   
                 <SwiperSlide key={i}>
                     <div className="swiper-slide" >
-
                         <div className="slide-inner" >
-                            {/* <div className="slide-image" 
-                            style={{ backgroundImage: `url(${value.gambar})` }}
-                            /> */}
-                            {/* <img className="slide-image"  src={value.gambar}/> */}
-                            <LazyLoadImage
-                                alt='image'
-                                // className="slide-image" 
-                                // effect="opacity"
-                                src={value.gambar} />
+                            <img className="slide-image"  src={value.gambar}/>
                             <div className="dot-overlay" />
                         </div>
                     </div>
                 </SwiperSlide>
                     );
                 })}
-                <SwiperSlide >x</SwiperSlide>
+
+                <SwiperSlide ><img className="slide-image"  src=''/>a</SwiperSlide>
                         
             </Swiper>
                         
@@ -108,10 +98,13 @@ export default function HomeIndex()  {
                 </div>
                 
             </section>
-            <ServiceHome/>
-            <TopEventIndex/>
+            {/* <ServiceHome/> */}
+            {/* <TopEventIndex/> */}
+            
+            <HomeList/> 
             <RelatedEventIndex/>
-            {/* <BlogIndex/> */}
+            <Partner/>
+          <Footer/>      
         </>
         )
     

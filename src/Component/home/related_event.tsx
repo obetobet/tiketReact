@@ -5,9 +5,14 @@ import 'swiper/css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
+import { translate } from '../../i18n';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 export default function RelatedEventIndex () {
     const navigationPrevRef = React.useRef<HTMLDivElement>(null)
     const navigationNextRef = React.useRef<HTMLDivElement>(null)
+    const { language } = useSelector((state: RootState) => state.lang);
+
       return (
         <>  
             <section className="trending bg-grey pt-17 pb-6">
@@ -19,23 +24,13 @@ export default function RelatedEventIndex () {
                 <div className="row align-items-center justify-content-between mb-6 ">
                 <div className="col-lg-7">
                     <div className="section-title text-center text-lg-start">
-                    <h4 className="mb-1 theme1">Top Pick</h4>
-                    <h2 className="mb-1">
-                        Best <span className="theme">Tour Packages</span>
-                    </h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore.
-                    </p>
+                    <h2 className="mb-1" >{translate('News', language)}</h2>
                     </div>
                 </div>
                 <div className="col-lg-5"></div>
                 </div>
                 <div className="trend-box">
-
-
                 <div className="row item-slider slick-initialized slick-slider">
-               
                     <Swiper
                         breakpoints={{
                             499: {

@@ -1,57 +1,32 @@
+import React, { FC } from 'react';
+import { BrowserRouter, Routes , Route } from 'react-router-dom';
 
-import Favicon from 'react-favicon'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbarx from './Component/Layout/Navbar';
-
-import Footer from './Component/Layout/Footer';
+import About from './Component/about/about';
 import HomeIndex from './Component/home/home';
-import Partner from './Component/home/partner';
-import React, { useState, useEffect } from "react";
-type resultProps = {
-  webiste: string;
-  email:string;
-  telp:string;
-  alamat:string;
-  logo:string;
-  favicon:string;
-  facebook:string;
-  instagram:string;
-  twitter:string;
-  youtube:string;
-};
-function App() {
-  const [result, setResult] = useState<resultProps[]>([]);
-  
-    useEffect(() => {
-    const api = async () => {
-      const data = await fetch("https://obet.pythonanywhere.com/v1/website/", {
-        method: "GET",
-        headers: {
-            'Authorization':'token 836a53db3ee059632f06a84ce3cebbee78a030f2'
-        }
-      });
-      const jsonData = await data.json();
-      setResult(jsonData);
-    };
+import {EventList} from './Component/event/list';
+import BlogList from './Component/blog/list';
+import { Faq } from './Component/helps/Faq';
+import { Contact_us } from './Component/helps/Contact_us';
+import ScrollToTop from './Component/helpers/ScrollToTop';
+import { Error404 } from './Component/helps/Error_404';
 
-
-    api();
-    }, []);
+const App: FC = () => {
   return (
-    
-    <div className="container-fuild">
-      {result.map((value,i) => {
-              return (   
-                <Favicon key={i} url={value.favicon} />
-                );
-      })}
+    <BrowserRouter>
+     <ScrollToTop />
+      <Routes >
+          <Route path="/" element={<HomeIndex/>}></Route>
+          <Route path="/about-us" element={<About/>}></Route>
+          <Route path="/event" element={<EventList title='Event List' judul='Event List'/>}></Route>
+          <Route path="/blog" element={<BlogList/>}></Route>
+          <Route path="/faq" element={<Faq/>}></Route>
+          <Route path="/contact-us" element={<Contact_us/>}></Route>
+          <Route path="*" element={<Error404/>}></Route>
+        
+        
+      </Routes >
       
-      <Router>
-          <Navbarx/>
-              <Partner/>
-          <Footer/>
-      </Router>
-    </div>
+    </BrowserRouter>
   );
 }
 
