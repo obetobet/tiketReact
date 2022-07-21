@@ -1,11 +1,8 @@
 import React from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Footer from '../Layout/Footer';
-import Navbarx from '../Layout/Navbar';
 export default function BlogList() {
   return (  
     <>
-    <Navbarx/>
         <HelmetProvider>
             <Helmet>
             <title>Halaman Blog List</title>
@@ -433,7 +430,6 @@ export default function BlogList() {
           </div>
         </section>
 
-    <Footer/>
 
 
     </>

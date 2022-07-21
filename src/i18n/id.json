@@ -28,7 +28,13 @@
   "Last Name":"Nama Belakang",
   "Email":"Email",
   "Phone":"Telepon",
-  "Enter a Message":"Masukkan Pesan"
+  "Enter a Message":"Masukkan Pesan",
+
+
+  "Telp":"Telp",
+  "Location":"Lokasi",
+  "Email Address" :"Alamat Email",
+  "fodeskripsi" : "Web ini dibuat untuk penjualan tiket di indonesia"
 
 
 

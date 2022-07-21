@@ -9,6 +9,7 @@
   "Helps":"Helps",
   "Categories":"Categories",
   "Newsletter":"Newsletter",
+  "News":"News",
 
 
   "Office Location":"Office Location",
@@ -26,10 +27,14 @@
   "Last Name":"Last Name",
   "Email":"Email",
   "Phone":"Phone",
-  "Enter a Message":"Enter a Message"
+  "Enter a Message":"Enter a Message",
 
 
 
+  "Telp":"Telp",
+  "Location":"Location",
+  "Email Address" :"Email Address",
+  "fodeskripsi" :"This website is made for ticket sales in Indonesia"
   
 
 

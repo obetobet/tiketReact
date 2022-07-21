@@ -1,20 +1,21 @@
 import React, { useCallback, useState, useEffect, useRef, FC } from 'react';
 import { Link,NavLink  } from 'react-router-dom';
 
-import { Loginuser } from '../user/auth';
+import Profile  from '../user/auth';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { setLanguage } from '../../store/actions/langActions';
 import { translate } from '../../i18n';
 import Dropdown from 'react-bootstrap/Dropdown';
-
-interface NavbarProps {
+type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
+    logo?: string;
   }
 
-const Navbarx: FC<NavbarProps> = ({ fixed, transparent }) => {
+export const Navbarx =( props : NavbarProps) =>{
+// const Navbarx: FC<NavbarProps> = ({ fixed, transparent,logo }) => {
     const { language } = useSelector((state: RootState) => state.lang);
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
@@ -34,8 +35,8 @@ const Navbarx: FC<NavbarProps> = ({ fixed, transparent }) => {
             <div className="container">
                 <div className="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="index.html">
-                    <img src="images/logo.png" alt="image" />
+                    <a className="navbar-brand" href="/">
+                    <img src={props.logo} alt="image" />    
                     </a>
                 </div>
                 <div  className="navbar-collapse1 d-flex align-items-center"id="bs-example-navbar-collapse-1">
@@ -67,7 +68,7 @@ const Navbarx: FC<NavbarProps> = ({ fixed, transparent }) => {
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Loginuser/>
+                    <Profile/>
                 </div>
                 <div id="slicknav-mobile">
                     <div className="slicknav_menu">
@@ -107,7 +108,7 @@ const Navbarx: FC<NavbarProps> = ({ fixed, transparent }) => {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
-                            <li><Loginuser/></li>
+                            <li><Profile/></li>
                         </ul>
                             
                             :null
@@ -125,6 +126,6 @@ const Navbarx: FC<NavbarProps> = ({ fixed, transparent }) => {
 
   </>
   );
-
-}
+                    }
+// }
 export default Navbarx;

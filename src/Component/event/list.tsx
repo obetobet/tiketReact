@@ -8,20 +8,13 @@ import { RootState } from '../../store';
 import Moment from 'moment';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import Footer from '../Layout/Footer';
-import Navbarx from '../Layout/Navbar';
+
 type EventProps = {
   title : string
   judul : string
 }
 export const EventList = (props : EventProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
-  // const data: TApiResponse = useApiGet(
-  //   'https://obet.pythonanywhere.com/v1/event/?limit=20'
-  // );
-
-  
-  // if (!data.loading) console.log(data.data);
 
   const [result, setResult] = useState([]);
   
@@ -29,9 +22,6 @@ export const EventList = (props : EventProps) =>{
     const api = async () => {
       const data = await fetch("https://obet.pythonanywhere.com/v1/event/?limit=20", {
         method: "GET",
-        // headers: {
-        //     'Authorization':'token 836a53db3ee059632f06a84ce3cebbee78a030f2'
-        // }
       });
       const jsonData = await data.json();
       console.log(jsonData.results)
@@ -45,7 +35,6 @@ export const EventList = (props : EventProps) =>{
 
   return (  
     <>
-    <Navbarx/>
       <HelmetProvider>
               <Helmet>
                 <title>{props.title}</title>
@@ -100,8 +89,7 @@ export const EventList = (props : EventProps) =>{
             
           </div>
         </div>
-      </section>
-    <Footer/>        
+      </section>  
     </>
   )
 }

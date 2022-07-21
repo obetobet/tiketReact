@@ -1,13 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { translate } from '../../i18n';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import Author from './author';
 import Testimonails from './testimonial';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Footer from '../Layout/Footer';
-import Navbarx from '../Layout/Navbar';
-export default function About() {
+import AboutModel from "../../models/about";
+import * as toastr from 'toastr';
+import BaseService from '../../service/service'
+import Image from 'react-bootstrap/Image'
+
+
+interface IProps {}
+interface IState {
+  person: AboutModel
+}
+// const {language} = useSelector((state: RootState) => state.lang);
+export default class About extends React.Component<IProps, IState> {
+  
+        constructor(props: IProps) {
+
+          super(props);
+
+          this.state = {
+              person: {
+                  Gambar: '',      
+                  Visit: '',
+                  Id: ''
+              }
+          }
+
+      }
+
+      public componentDidMount() { 
+          BaseService.getAll<AboutModel>('/about/2/').then(
+              (rp) => {
+                  if (rp.Status) {
+                      const person = rp.Data;  
+                      this.setState({ person: new AboutModel(person._id, person.gambar,person.visit, person.translations )});
+                  } else {
+                      toastr.error(rp.Messages);
+                      console.log("Messages: " + rp.Messages);
+                      console.log("Exception: " + rp.Exception);
+                  }
+              }
+
+          );
+      }
+
+
+    render() {
+      
   return (  
     <>
-      <Navbarx/>
         <HelmetProvider>
               <Helmet>
                 <title>Halaman About</title>
@@ -26,7 +71,7 @@ export default function About() {
               <div className="row d-flex align-items-center justify-content-between">
                 <div className="col-lg-6 ps-4">
                   <div className="about-content text-center text-lg-start">
-                    <h4 className="theme d-inline-block mb-0">Get To Know Us</h4>
+                    <h4 className="theme d-inline-block mb-0"></h4>
                     <h2 className="border-b mb-2 pb-1">Explore All Tour of the world with us.</h2>
                     <p className="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     <div className="about-listing">
@@ -40,7 +85,7 @@ export default function About() {
                 </div>
                 <div className="col-lg-6 mb-4 pe-4">
                   <div className="about-image" style={{animation: 'none', background: 'transparent'}}>
-                    <img src="images/travel.png" alt="" />
+                    <Image src={this.state.person.Gambar} rounded/>
                   </div>
                 </div>
                 <div className="col-lg-12">
@@ -89,9 +134,9 @@ export default function About() {
           <div className="white-overlay" />
         </section>
 
-        <Author/>
+        {/* <Author/> */}
         <Testimonails/>
-      <Footer/>
     </>
   )
+}
 }

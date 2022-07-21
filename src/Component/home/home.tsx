@@ -42,7 +42,6 @@ export default function HomeIndex()  {
 
       return (
         <>  
-          <Navbarx/>
             <HelmetProvider>
               <Helmet>
                 <title>HOME</title>
@@ -105,7 +104,6 @@ export default function HomeIndex()  {
             <HomeList/> 
             <RelatedEventIndex/>
             <Partner/>
-          <Footer/>      
         </>
         )
     
