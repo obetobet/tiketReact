@@ -23,8 +23,11 @@ export default class Profile extends Component<Props, State> {
     componentDidMount() {
         const currentUser = AuthService.getCurrentUser();
         
-        if (!currentUser) this.setState({navigate: "/" });
-        this.setState({ currentUser: currentUser, userReady: true })
+
+        if (currentUser){
+            this.setState({ currentUser: currentUser, userReady: true })
+        }
+        
       }
 
       render(){
@@ -36,7 +39,7 @@ export default class Profile extends Component<Props, State> {
         return (
             <>
              {(this.state.userReady) ?
-                <a  href="#"   className="me-3 userlog" ><i className="icon-user" />{currentUser.email}</a>
+                <a  href="#"   className="me-3 userlog" ><i className="icon-user" /></a>
                 :
                 <a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"  className="me-3 userlog" ><i className="icon-user" /> Login</a>
              }
