@@ -52,7 +52,7 @@ export default class LoginForm extends Component<Props, State> {
       () => {
         
         // this.props.history.push("/about");
-        // window.location.reload();
+        window.location.reload();
       },
       error => {
         const resMessage =
