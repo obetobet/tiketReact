@@ -29,9 +29,9 @@ export const EventList = (props : EventProps) =>{
     const api = async () => {
       const data = await fetch("https://obet.pythonanywhere.com/v1/event/?limit=20", {
         method: "GET",
-        headers: {
-            'Authorization':'token 836a53db3ee059632f06a84ce3cebbee78a030f2'
-        }
+        // headers: {
+        //     'Authorization':'token 836a53db3ee059632f06a84ce3cebbee78a030f2'
+        // }
       });
       const jsonData = await data.json();
       console.log(jsonData.results)

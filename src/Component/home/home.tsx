@@ -11,6 +11,7 @@ import Footer from "../Layout/Footer";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { HomeList } from "./list";
 import Partner from "./partner";
+import Image from 'react-bootstrap/Image'
 type resultProps = {
     title: string;
     gambar:string;
@@ -66,8 +67,8 @@ export default function HomeIndex()  {
                         modules={[Navigation,Autoplay]}
                         speed= {1000}
                         autoplay={{
-                            delay: 7000,
-                            // disableOnInteraction: false,
+                            delay: 5000,
+                            disableOnInteraction: false,
                           }}
                         
                         >
@@ -76,7 +77,7 @@ export default function HomeIndex()  {
                 <SwiperSlide key={i}>
                     <div className="swiper-slide" >
                         <div className="slide-inner" >
-                            <img className="slide-image"  src={value.gambar}/>
+                          <Image className="slide-image img-fluid"  src={value.gambar} />
                             <div className="dot-overlay" />
                         </div>
                     </div>

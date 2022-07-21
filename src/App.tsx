@@ -9,24 +9,29 @@ import { Faq } from './Component/helps/Faq';
 import { Contact_us } from './Component/helps/Contact_us';
 import ScrollToTop from './Component/helpers/ScrollToTop';
 import { Error404 } from './Component/helps/Error_404';
-
+import { Offline, Online } from "react-detect-offline";
 const App: FC = () => {
   return (
-    <BrowserRouter>
-     <ScrollToTop />
-      <Routes >
-          <Route path="/" element={<HomeIndex/>}></Route>
-          <Route path="/about-us" element={<About/>}></Route>
-          <Route path="/event" element={<EventList title='Event List' judul='Event List'/>}></Route>
-          <Route path="/blog" element={<BlogList/>}></Route>
-          <Route path="/faq" element={<Faq/>}></Route>
-          <Route path="/contact-us" element={<Contact_us/>}></Route>
-          <Route path="*" element={<Error404/>}></Route>
+    
+    
+      <div>
+      <Online>
+        <BrowserRouter>
+          <ScrollToTop />
+            <Routes >
+                <Route path="/" element={<HomeIndex/>}></Route>
+                <Route path="/about-us" element={<About/>}></Route>
+                <Route path="/event" element={<EventList title='Event List' judul='Event List'/>}></Route>
+                <Route path="/blog" element={<BlogList/>}></Route>
+                <Route path="/faq" element={<Faq/>}></Route>
+                <Route path="/contact-us" element={<Contact_us/>}></Route>
+                <Route path="*" element={<Error404/>}></Route>
+            </Routes >
         
-        
-      </Routes >
-      
-    </BrowserRouter>
+        </BrowserRouter>
+      </Online>
+      <Offline>You're offline right now. Check your connection.</Offline>
+    </div>
   );
 }
 
