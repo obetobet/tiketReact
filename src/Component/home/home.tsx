@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ServiceHome from './service';
-import TopEventIndex from './top_event';
-import RelatedEventIndex from './related_event';
+import Artikel from './artikel';
 import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
 
-import Navbarx from "../Layout/Navbar";
-import Footer from "../Layout/Footer";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { HomeList } from "./list";
 import Partner from "./partner";
@@ -102,7 +99,7 @@ export default function HomeIndex()  {
             {/* <TopEventIndex/> */}
             
             <HomeList/> 
-            <RelatedEventIndex/>
+            <Artikel/>
             <Partner/>
         </>
         )

@@ -14,6 +14,7 @@ import WebsiteModel from './models/webiste';
 import BaseService from './service/service';
 import Navbarx from './Component/Layout/Navbar';
 import Footer from './Component/Layout/Footer';
+import ArtikelDetail from './Component/artikel/artikel_detail';
 import Favicon from 'react-favicon'
 interface IProps {}
 interface IState {
@@ -76,6 +77,7 @@ export default class App extends React.Component<IProps, IState> {
                 <Route path="/faq" element={<Faq/>}></Route>
                 <Route path="/contact-us" element={<Contact_us/>}></Route>
                 <Route path="*" element={<Error404/>}></Route>
+                <Route path='/event/detail/:id' element={<ArtikelDetail/> } />
             </Routes >
           <Footer 
           facebook={this.state.website.Facebook}

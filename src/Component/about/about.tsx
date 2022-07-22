@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import Author from './author';
 import Testimonails from './testimonial';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AboutModel from "../../models/about";
@@ -15,7 +14,7 @@ interface IProps {}
 interface IState {
   person: AboutModel
 }
-// const {language} = useSelector((state: RootState) => state.lang);
+
 export default class About extends React.Component<IProps, IState> {
   
         constructor(props: IProps) {
@@ -26,7 +25,8 @@ export default class About extends React.Component<IProps, IState> {
               person: {
                   Gambar: '',      
                   Visit: '',
-                  Id: ''
+                  Id: '',
+                  Translations:{}
               }
           }
 
@@ -36,18 +36,23 @@ export default class About extends React.Component<IProps, IState> {
           BaseService.getAll<AboutModel>('/about/2/').then(
               (rp) => {
                   if (rp.Status) {
-                      const person = rp.Data;  
-                      this.setState({ person: new AboutModel(person._id, person.gambar,person.visit, person.translations )});
-                  } else {
+                      const person = rp.Data; 
+                      this.setState(
+                        { person: new AboutModel(person._id, person.gambar,person.visit, person.translations )},                        );
+                        
+                        
+                    } else {
                       toastr.error(rp.Messages);
                       console.log("Messages: " + rp.Messages);
                       console.log("Exception: " + rp.Exception);
                   }
+                  console.log(this.state.person.Translations.en.title)
               }
 
           );
+          
       }
-
+      
 
     render() {
       
@@ -72,7 +77,7 @@ export default class About extends React.Component<IProps, IState> {
                 <div className="col-lg-6 ps-4">
                   <div className="about-content text-center text-lg-start">
                     <h4 className="theme d-inline-block mb-0"></h4>
-                    <h2 className="border-b mb-2 pb-1">Explore All Tour of the world with us.</h2>
+                    <h2 className="border-b mb-2 pb-1"></h2>
                     <p className="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     <div className="about-listing">
                       <ul className="d-flex justify-content-between">
