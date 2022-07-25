@@ -28,6 +28,7 @@ export default class BaseService {
     public static get<T>(url: string, param: any): Promise<Response> {
         let res = axios.get<T>(this.baseURL + url + param ,{ headers: { Authorization: this.token } })
             .then((response: any) => {
+                console.log('asdad'+response)
                 const result = response.data;                
                 if(result && result.success){
                     return new Response(true, result.data , "Success", "");
@@ -41,9 +42,27 @@ export default class BaseService {
             });
         return res;
     }
+
+    public static async getdetail<T>(url: string,param: any,): Promise<Response> {
+        let res = await axios.get<Array<T>>(this.baseURL + url + param,{ headers: { Authorization: this.token } })
+            .then((response: any) => {
+                const result = response.data;
+                if(result && result){
+                    return new Response(true, result  as Array<T>, "Success", "");
+                }else{
+                    const msg = (result.messageList && result.messageList.length > 0) ? result.messageList[0].text: "Error";
+                    return new Response(false, null, "Error", msg);
+                }
+              
+            })
+            .catch(function (error) {
+                return new Response(false, null, "Error", error);
+            });
+        return res;
+    }
+
     public static delete(url: string, param: any): Promise<Response> {
-        console.log(param);
-        
+   
         let res = axios.delete(this.baseURL + url , { data: param } )
             .then(response => { 
                 const result = response.data;

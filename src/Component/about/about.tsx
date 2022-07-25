@@ -8,26 +8,30 @@ import AboutModel from "../../models/about";
 import * as toastr from 'toastr';
 import BaseService from '../../service/service'
 import Image from 'react-bootstrap/Image'
-
+import {DetailAbout} from './detail_about'
 
 interface IProps {}
 interface IState {
   person: AboutModel
+  Trans_id : any
+  Trans_en : any
 }
 
 export default class About extends React.Component<IProps, IState> {
-  
         constructor(props: IProps) {
 
           super(props);
 
           this.state = {
+            Trans_id: [],
+            Trans_en: [],
               person: {
                   Gambar: '',      
                   Visit: '',
                   Id: '',
                   Translations:{}
-              }
+              },
+              
           }
 
       }
@@ -38,21 +42,18 @@ export default class About extends React.Component<IProps, IState> {
                   if (rp.Status) {
                       const person = rp.Data; 
                       this.setState(
-                        { person: new AboutModel(person._id, person.gambar,person.visit, person.translations )},                        );
-                        
-                        
+                        { Trans_id :person.translations.id,Trans_en :person.translations.en,person: new AboutModel(person._id, person.gambar,person.visit, person.translations )});  
                     } else {
                       toastr.error(rp.Messages);
                       console.log("Messages: " + rp.Messages);
                       console.log("Exception: " + rp.Exception);
                   }
-                  console.log(this.state.person.Translations.en.title)
+                  
               }
 
           );
           
       }
-      
 
     render() {
       
@@ -75,18 +76,8 @@ export default class About extends React.Component<IProps, IState> {
             <div className="about-image-box">
               <div className="row d-flex align-items-center justify-content-between">
                 <div className="col-lg-6 ps-4">
-                  <div className="about-content text-center text-lg-start">
-                    <h4 className="theme d-inline-block mb-0"></h4>
-                    <h2 className="border-b mb-2 pb-1"></h2>
-                    <p className="border-b mb-2 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div className="about-listing">
-                      <ul className="d-flex justify-content-between">
-                        <li><i className="icon-location-pin theme" /> Tour Guide</li>
-                        <li><i className="icon-briefcase theme" /> Friendly Price</li>
-                        <li><i className="icon-folder theme" /> Reliable Tour Package</li>
-                      </ul>
-                    </div>
-                  </div>
+                  <DetailAbout Trans_id={this.state.Trans_id} Trans_en={this.state.Trans_en}/>
+                  
                 </div>
                 <div className="col-lg-6 mb-4 pe-4">
                   <div className="about-image" style={{animation: 'none', background: 'transparent'}}>
@@ -140,7 +131,7 @@ export default class About extends React.Component<IProps, IState> {
         </section>
 
         {/* <Author/> */}
-        <Testimonails/>
+        {/* <Testimonails/> */}
     </>
   )
 }

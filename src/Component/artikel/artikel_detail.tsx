@@ -6,50 +6,67 @@ import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
+import { History } from 'history';
 import Moment from 'moment';
+import { useParams } from 'react-router-dom';
 interface IProps {
-//   match:{ 
-//     isExact: boolean
-//     params: {
-//         id:string
-//     },
-//     path: string,
-//     url: string,
+  // history: History;
+  // match:{ 
+  //   isExact: boolean
+    // params: {
+        id:string
+    // },
+    // path: string,
+    // url: string,
 // }
 }
 interface IState {
-  person: ArtikelModel
+  // person: ArtikelModel,
+  Id: string,
+  Category: string,
+  Gambar: string,    
+  Date: string,
+  Author: string,
+  Visit: string,
+  Title: string,
+  Description: string,
+  Translations_id:any,
+  Translations_en:any
 }
-
+type QuizParams = {
+  id: string;
+};
 class ArtikelDetail extends React.Component<IProps, IState> {
       constructor(props: IProps) {
 
         super(props);
         this.state = {
-            person: {
-                Id: '',
-                Category: '',
-                Gambar: '',    
-                Date: '',
-                Author: '',
-                Visit: 0,
-                Translations:{}
-            }
+          Id: '',
+          Category: '',
+          Gambar: '',    
+          Date: '',
+          Author: '',
+          Visit: '',
+          Title: '',
+          Description: '',
+          Translations_id:[],
+          Translations_en:[],
+            
         }
 
     }
     
     public componentDidMount() { 
-      BaseService.get<ArtikelModel>('/event/', '12').then(
+      
+      BaseService.getdetail<ArtikelModel>('/artikel/','4').then(
           (rp) => {
-            console.log(rp)
+            
               if (rp.Status) {
                   const p = rp.Data; 
-                  
                   this.setState(
-                    { person:(p.id,p.title_Category, p.gambar, p.title, p.description, p.date, p.author, p.slug, p.visit,p.translations)},                        );
-                    
-                    
+                    { Id : p.id,Category : p.title_Category,Gambar: p.gambar,Title: p.title,Description: p.description, Date: p.date,Author: p.author, Visit: p.visit,Translations_en : p.translations.en, Translations_id : p.translations.id},                        );
+                    // const { id } = useParams<QuizParams>();
+                    // console.log(id)
                 } else {
                   toastr.error(rp.Messages);
                   console.log("Messages: " + rp.Messages);
@@ -73,10 +90,10 @@ class ArtikelDetail extends React.Component<IProps, IState> {
             <div className="col-lg-9 mb-4">
               <div className="blog-single">
                 <div className="blog-wrapper">
-                  <h2 className="lh-sm">Apple honors eight developers with annual Apple Design Awards.</h2>
+                  <h2 className="lh-sm">{localStorage.getItem('language') == 'Indonesia' ? this.state.Translations_id.title : this.state.Translations_en.title}</h2>
                   <div className="blog-content first-child-cap">
                     <p className="mb-3">The property, complete with a 30-seat screening room, a 100-seat amphitheater and a swimming pond with sandy beach and outdoor shower, was asking about $40 million. Lorem ipsum dolor sit amet, consectetur adipis Vi ales elit vitae lo bortis faucibus. Lorem ipsum dolor sit amet, conse dolor sit amet, consectetu ctetur adipis Viales. Lorem ipsum dolor sit amet, cons sit amet, consectetur adi ectetur adipis Vi.<br /><br />
-                      <img src="images/bg/bg3.jpg" alt="image" className="mb-3 rounded" />
+                     
                       It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
                   </div>
                   <div className="blog-quote mb-4 rounded">
@@ -237,7 +254,7 @@ class ArtikelDetail extends React.Component<IProps, IState> {
               <div className="sidebar-sticky">
                 <div className="detail-sidebar">
                   <div className="mag-image mb-2 position-relative">
-                    <img src="images/destination/destination10.jpg" alt="Image" className="rounded" />
+                    <img src={this.state.Gambar} width={300} alt="Image" className="rounded" />
                     <div className="video-button text-center position-absolute top-50 start-0 end-0 z-index1">
                       <div className="call-button text-center">
                         <button type="button" className="play-btn js-video-button" data-video-id={152879427} data-channel="vimeo">

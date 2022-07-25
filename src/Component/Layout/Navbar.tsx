@@ -7,7 +7,7 @@ import { setLanguage } from '../../store/actions/langActions';
 import { translate } from '../../i18n';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
+import {ListMobile} from '../home/list.mobile';
 type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
@@ -30,6 +30,10 @@ export const Navbarx =( props : NavbarProps) =>{
  
   return (  
     <>
+    
+        <ListMobile/> 
+        
+
     <header className="main_header_area">
     <div className="header_menu" id="header_menu">
         <nav className="navbar navbar-default" >
