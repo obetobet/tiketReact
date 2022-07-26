@@ -24,7 +24,6 @@ export const EventList = (props : EventProps) =>{
         method: "GET",
       });
       const jsonData = await data.json();
-      console.log(jsonData.results)
       setResult(jsonData.results);
     };
 

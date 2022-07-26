@@ -51,7 +51,6 @@ class ArtikelList extends React.Component<IProps, IState>  {
             this.setState(
               { list: list },
               function (){
-                console.log(list)
               }); 
             this.setState({ isReady: true });
           } else {

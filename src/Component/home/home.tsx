@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ServiceHome from './service';
 import Artikel from './artikel';
 import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
-
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { HomeList } from "./list";
 import EventList from "../event/list_home"
 import Partner from "./partner";
 import Image from 'react-bootstrap/Image'
@@ -93,10 +90,6 @@ export default function HomeIndex()  {
                 </div>
                 
             </section>
-            {/* <ServiceHome/> */}
-            {/* <TopEventIndex/> */}
-            
-            {/* <HomeList/>  */}
             <EventList/>
             <Artikel/>
             <Partner/>

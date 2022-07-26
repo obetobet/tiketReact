@@ -71,7 +71,6 @@ class ArtikelDetail extends React.Component<IProps, IState> {
                   this.setState(
                     { Id : p.id,Category : p.title_Category,Gambar: p.gambar,Title: p.title,Description: p.description, Date: p.date,Author: p.author, Visit: p.visit,Translations_en : p.translations.en, Translations_id : p.translations.id},                        );
                    
-                    this.test()
                 } else {
                   toastr.error(rp.Messages);
                   console.log("Messages: " + rp.Messages);
@@ -83,9 +82,7 @@ class ArtikelDetail extends React.Component<IProps, IState> {
       
   }
 
-  public test () {
-      console.log(this.props)
-  }
+
 
 
     render (){

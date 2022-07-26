@@ -28,7 +28,6 @@ export default class BaseService {
     public static get<T>(url: string, param: any): Promise<Response> {
         let res = axios.get<T>(this.baseURL + url + param ,{ headers: { Authorization: this.token } })
             .then((response: any) => {
-                console.log('asdad'+response)
                 const result = response.data;                
                 if(result && result.success){
                     return new Response(true, result.data , "Success", "");

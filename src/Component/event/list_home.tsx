@@ -5,7 +5,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Moment from 'moment';
 import { Link,NavLink  } from 'react-router-dom';
 import { FaMapMarkerAlt,FaCalendar,FaClipboardCheck } from 'react-icons/fa';
-
 interface IProps {}
 interface IState {
   list: Array<EventModel>;
@@ -49,7 +48,6 @@ class EventList extends React.Component<IProps, IState>  {
             this.setState(
               { list: list },
               function (){
-                console.log(list)
               }); 
             this.setState({ isReady: true });
           } else {
@@ -73,7 +71,9 @@ class EventList extends React.Component<IProps, IState>  {
                     <div className="row" >
                         <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="item-inner-image text-start">
-                            <img src={object.Image}  alt="image" /><br/>
+                              <LazyLoadImage   alt='{object.Title}'
+                                effect="blur"
+                                src={object.Image} />
                             <h5 className="mb-0 text-center" style={{padding:"15px"}}>{object.Title}</h5>
                             </div>
                         </div>

@@ -16,7 +16,6 @@ export const HomeList = (props : LoginProps) => {
     const { language } = useSelector((state: RootState) => state.lang);
     const showSidebar = () => {  
       setShowfilter({openedFilter:true}); 
-      console.log(showfilter)
      }; 
     const [values,setvalues]=useState({ values: [50] })
     return (
