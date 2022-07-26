@@ -31,7 +31,7 @@ export const Navbarx =( props : NavbarProps) =>{
   return (  
     <>
     
-        <ListMobile/> 
+        {/* <ListMobile/>  */}
         
 
     <header className="main_header_area">

@@ -1,10 +1,8 @@
-import Footer from "../Layout/Footer"
-import Navbarx from "../Layout/Navbar"
+
 
 export const Error404 = () => {
     return (
         <>
-        <Navbarx/>
         <section className="error overflow-hidden pb-10 pt-20">
         <div className="container">
           <div className="error-main">
@@ -33,7 +31,6 @@ export const Error404 = () => {
           </div>
         </div>
       </section>
-        <Footer/>
         </>
     )
 }

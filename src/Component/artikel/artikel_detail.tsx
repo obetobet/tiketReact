@@ -8,18 +8,20 @@ import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
 import { History } from 'history';
 import Moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useParams,useSearchParams } from 'react-router-dom';
 interface IProps {
-  // history: History;
-  // match:{ 
-  //   isExact: boolean
-    // params: {
-        id:string
-    // },
-    // path: string,
-    // url: string,
+//   history: History;
+//   match:{ 
+//     isExact: boolean
+//     params: {
+//         id:string
+//     },
+//     path: string,
+//     url: string,
 // }
 }
+
+
 interface IState {
   // person: ArtikelModel,
   Id: string,
@@ -33,9 +35,10 @@ interface IState {
   Translations_id:any,
   Translations_en:any
 }
-type QuizParams = {
-  id: string;
-};
+interface RouteParams {
+  id: string
+}
+
 class ArtikelDetail extends React.Component<IProps, IState> {
       constructor(props: IProps) {
 
@@ -55,7 +58,9 @@ class ArtikelDetail extends React.Component<IProps, IState> {
         }
 
     }
-    
+
+   
+  
     public componentDidMount() { 
       
       BaseService.getdetail<ArtikelModel>('/artikel/','4').then(
@@ -65,8 +70,8 @@ class ArtikelDetail extends React.Component<IProps, IState> {
                   const p = rp.Data; 
                   this.setState(
                     { Id : p.id,Category : p.title_Category,Gambar: p.gambar,Title: p.title,Description: p.description, Date: p.date,Author: p.author, Visit: p.visit,Translations_en : p.translations.en, Translations_id : p.translations.id},                        );
-                    // const { id } = useParams<QuizParams>();
-                    // console.log(id)
+                   
+                    this.test()
                 } else {
                   toastr.error(rp.Messages);
                   console.log("Messages: " + rp.Messages);
@@ -76,6 +81,10 @@ class ArtikelDetail extends React.Component<IProps, IState> {
 
       );
       
+  }
+
+  public test () {
+      console.log(this.props)
   }
 
 

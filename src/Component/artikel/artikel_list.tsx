@@ -18,7 +18,7 @@ interface IState {
   
 }
 
-class ArtikelList extends React.Component<IProps, IState> {
+class ArtikelList extends React.Component<IProps, IState>  {
     public state: IState = {
         list: new Array<ArtikelModel>(),
         isReady: false,

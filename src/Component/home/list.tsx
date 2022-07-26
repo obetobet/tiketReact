@@ -25,13 +25,12 @@ export const HomeList = (props : LoginProps) => {
         <section className="trending pt-6 pb-0 bg-lgrey">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-12">
               <div className="list-results d-flex align-items-center justify-content-between">
                 <div className="list-results-sort">
                   <p className="m-0">Showing 1-5 of 80 results</p>
                 </div>
-                <div className="click-menu ">
-                  {/* <p  className='nir-btn-black float-end fltrh' id="react-burger-menu-btn" onClick={showSidebar}><FaFilter/>adsd</p> */}
+                {/* <div className="click-menu ">
                   <div className="sortby d-flex align-items-center justify-content-between ml-2">
                     <select className="niceSelect">
                       <option value={1}>Sort By</option>
@@ -41,7 +40,7 @@ export const HomeList = (props : LoginProps) => {
                     </select>
                   </div>
                   
-                </div>
+                </div> */}
                 
               </div>
               <div className="flight-list">
@@ -363,7 +362,7 @@ export const HomeList = (props : LoginProps) => {
                 <div className="flight-btn text-center"><a href="flight-grid.html" className="nir-btn">Load More</a></div>
               </div>
             </div>
-            <div className="col-lg-4 ps-lg-4">
+            {/* <div className="col-lg-4 ps-lg-4">
               <div className="sidebar-sticky">
                 <div className="list-sidebar">
                   <div className="sidebar-item mb-4">
@@ -391,7 +390,7 @@ export const HomeList = (props : LoginProps) => {
                   
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         </section>

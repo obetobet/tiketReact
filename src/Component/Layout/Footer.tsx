@@ -20,6 +20,7 @@ type FooterProps = {
   instagram?: string;
   youtube?: string;
   email?:string;
+  logo?:string;
 }
 export const Footer =( props : FooterProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
@@ -37,7 +38,7 @@ export const Footer =( props : FooterProps) =>{
       <div className="row">
         <div className="col-lg-4 col-md-6 col-sm-12 mb-4 pe-4">
           <div className="footer-about">
-            <img src="images/logo-white.png" alt="" />
+            <img src="images/logotik.png" alt="asd" />
             <p className="mt-3 mb-3 white">
               {translate('fodeskripsi', language)}
             </p>

@@ -29,6 +29,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-burger-menu": "^3.0.8",
+    "react-countup": "^6.3.0",
     "react-detect-offline": "^2.4.5",
     "react-dom": "^18.2.0",
     "react-favicon": "^1.0.1",
@@ -77,6 +78,7 @@
     "@types/react-burger-menu": "^2.8.3",
     "@types/react-detect-offline": "^2.4.1",
     "@types/react-lazy-load-image-component": "^1.5.2",
-    "@types/toastr": "^2.1.39"
+    "@types/toastr": "^2.1.39",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

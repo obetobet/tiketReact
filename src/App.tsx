@@ -64,7 +64,7 @@ export default class App extends React.Component<IProps, IState> {
   return (
       <div>
       <Online>
-      <Favicon url="{this.state.website.Favicon}"/>
+      <Favicon url={"" +this.state.website.Favicon}/>
         <BrowserRouter>
           
           <Navbarx logo={this.state.website.Logo}/>
@@ -77,7 +77,7 @@ export default class App extends React.Component<IProps, IState> {
                 <Route path="/faq" element={<Faq/>}></Route>
                 <Route path="/contact-us" element={<Contact_us/>}></Route>
                 <Route path="*" element={<Error404/>}></Route>
-                <Route path='/event/detail/:Id'  element={<ArtikelDetail id={'4'}/>}/>
+                <Route   path='/event/detail/:Id'  element={<ArtikelDetail/>}/>
                 {/* <Route path='/event/detail/:id' component={ ArtikelDetail } /></Route> */}
             </Routes >
           <Footer 
@@ -88,6 +88,7 @@ export default class App extends React.Component<IProps, IState> {
           website={this.state.website.Title} 
           email={this.state.website.Email} 
           telp={this.state.website.Telp} 
+          logo={this.state.website.Logo} 
           alamat={this.state.website.Alamat} />
         </BrowserRouter>
       </Online>

@@ -7,6 +7,7 @@ import 'swiper/css';
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { HomeList } from "./list";
+import EventList from "../event/list_home"
 import Partner from "./partner";
 import Image from 'react-bootstrap/Image'
 type resultProps = {
@@ -35,7 +36,6 @@ export default function HomeIndex()  {
     api();
     }, []);
 
-  
 
       return (
         <>  
@@ -51,7 +51,7 @@ export default function HomeIndex()  {
               </Helmet>
             </HelmetProvider>
             <section className="banner overflow-hidden">
-                <div className="slider top50">
+                <div className="slider top10">
                     <div className="swiper-container">
                     <div className="swiper-wrapper">
                     <Swiper
@@ -62,26 +62,24 @@ export default function HomeIndex()  {
                         slidesPerView={1}
                         modules={[Navigation,Autoplay]}
                         speed= {1000}
+                        
                         autoplay={{
                             delay: 5000,
                             disableOnInteraction: false,
-                          }}
-                        
-                        >
-                 {result.map((value,i) => {
-                        return (   
-                <SwiperSlide key={i}>
-                    <div className="swiper-slide" >
-                        <div className="slide-inner" >
-                          <Image className="slide-image img-fluid"  src={value.gambar} />
-                            <div className="dot-overlay" />
-                        </div>
-                    </div>
-                </SwiperSlide>
-                    );
-                })}
+                          }}>
 
-                <SwiperSlide ><img className="slide-image"  src=''/>a</SwiperSlide>
+                      {result.map(function (object, i) {
+                              return  <SwiperSlide key={i}>
+                                  
+                                  <div className="swiper-slide" >
+                                      <div className="slide-inner" >
+                                      
+                                      <img src="https://obet.pythonanywhere.com/media/slider/1.jpg" className="slide-image img-fluid"></img>
+                                          <div className="dot-overlay" />
+                                      </div>
+                                  </div>
+                              </SwiperSlide>
+                              })};
                         
             </Swiper>
                         
@@ -98,7 +96,8 @@ export default function HomeIndex()  {
             {/* <ServiceHome/> */}
             {/* <TopEventIndex/> */}
             
-            <HomeList/> 
+            {/* <HomeList/>  */}
+            <EventList/>
             <Artikel/>
             <Partner/>
         </>
