@@ -1,10 +1,7 @@
-import Footer from "../Layout/Footer"
-import Navbarx from "../Layout/Navbar"
 
 export const Contact_us = () => {
     return (
         <>
-        <Navbarx/>
         <section className="contact-main pt-6 pb-60">
         <div className="container">
           <div className="contact-info-main mt-0">
@@ -92,7 +89,6 @@ export const Contact_us = () => {
           </div>
         </div>
       </section>
-        <Footer/>
         </>
     )
 }

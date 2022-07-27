@@ -40,12 +40,12 @@ export const Navbarx =( props : NavbarProps) =>{
             <div className="container">
                 <div className="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="/">
+                    <Link className="navbar-brand" to='/'>
                     <LazyLoadImage
                         alt='logo'
                         effect="blur"
                         src={props.logo} />   
-                    </a>
+                    </Link>
                 </div>
                 <div  className="navbar-collapse1 d-flex align-items-center"id="bs-example-navbar-collapse-1">
                     <ul className="nav navbar-nav" id="responsive-menu">

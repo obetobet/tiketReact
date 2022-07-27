@@ -88,7 +88,7 @@ class ArtikelList extends React.Component<IProps, IState>  {
           </h5>
         
           <h3 className="mb-1">
-            <Link to={"/event/detail/" + object.Id }>
+            <Link to={"/event/detail/" + object.Id } >
               {localStorage.getItem('language') == 'Indonesia' ? object.Translations.id.title : object.Translations.en.title} 
             </Link>
           </h3>

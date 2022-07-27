@@ -5,10 +5,8 @@ export default function authHeader() {
       user = JSON.parse(userStr);
   
     if (user && user.access) {
-      return { Authorization: 'token ' + user.access }; // for Spring Boot back-end
-      // return { 'x-access-token': user.accessToken };       // for Node.js Express back-end
+      return { Authorization: 'token ' + user.access }; 
     } else {
-      return { Authorization: '' }; // for Spring Boot back-end
-      // return { 'x-access-token': null }; // for Node Express back-end
+      return { Authorization: '' }; 
     }
   }

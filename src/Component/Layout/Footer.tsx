@@ -69,10 +69,10 @@ export const Footer =( props : FooterProps) =>{
             <h3 className="white">{translate('Helps', language)}</h3>
             <ul>
               <li>
-                <a href="about-us.html">{translate('Privacy Policy', language)}</a>
+              <Link  to="/faq" >{translate('Privacy Policy', language)}</Link>
               </li>
               <li>
-                <a href="about-us.html">{translate('Terms & Conditions', language)}</a>
+              <Link  to="/contact-us" >{translate('Terms & Conditions', language)}</Link>
               </li>
               <li>
                 <Link  to="/contact-us" >{translate('contact-us', language)}</Link>

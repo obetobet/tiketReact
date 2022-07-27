@@ -2,8 +2,8 @@ import AuthService from "../../service/auth.service";
 import { Component, ReactNode } from "react";
 import UserModel from "../../models/user";
 import { Navigate  } from "react-router-dom";
+import { Link,NavLink  } from 'react-router-dom';
 type Props = {};
-
 type State = {
     navigate: string | null,
   userReady: boolean,
@@ -23,7 +23,7 @@ export default class Profile extends Component<Props, State> {
     componentDidMount() {
         const currentUser = AuthService.getCurrentUser();
         
-
+        console.log(currentUser)
         if (currentUser){
             this.setState({ currentUser: currentUser, userReady: true })
         }
@@ -39,7 +39,7 @@ export default class Profile extends Component<Props, State> {
         return (
             <>
              {(this.state.userReady) ?
-                <a  href="#"   className="me-3 userlog" ><i className="icon-user" /></a>
+                <Link className="me-3 userlog" to='/user-profile'><i className="icon-user" /> </Link>
                 :
                 <a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"  className="me-3 userlog" ><i className="icon-user" /> Login</a>
              }

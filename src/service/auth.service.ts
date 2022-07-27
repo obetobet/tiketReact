@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import jwt_decode from "jwt-decode";
 const API_URL = "https://obet.pythonanywhere.com/v1/auth/";
 
 class AuthService {
@@ -11,7 +11,10 @@ class AuthService {
       })
       .then(response => {
         if (response.data.access) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+          var token = response.data.access;
+          var decoded = jwt_decode(token);
+          localStorage.setItem("user", JSON.stringify(decoded));
+          localStorage.setItem("token", JSON.stringify(response.data.access));
         }
 
         return response.data;
@@ -20,6 +23,8 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("toket");
   }
 
   register(username: string, email: string, password: string, password2 : string,first_name : string,last_name  : string) {
@@ -38,6 +43,12 @@ class AuthService {
     const userStr = localStorage.getItem("user");
     if (userStr) return JSON.parse(userStr);
 
+    return null;
+  }
+
+  gettoketUser() {
+    const userStr = localStorage.getItem("toket");
+    if (userStr) return JSON.parse(userStr);
     return null;
   }
 }

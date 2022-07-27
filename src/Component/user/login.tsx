@@ -1,15 +1,16 @@
 import { Component } from "react";
-import { useNavigate   } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { History } from 'history';
 import AuthService from "../../service/auth.service";
-
+import { RouteComponentProps,} from '@reach/router';
+import Response from "../../models/response";
+  import axios from "axios";
 interface RouterProps {
   history: string;
 }
 
-type Props = {};
+type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   username: string,
@@ -38,9 +39,23 @@ export default class LoginForm extends Component<Props, State> {
     });
   }
 
+
+  handletoket(username :any, password:any){
+    let res = axios.post('http://obet.pythonanywhere.com/api-token-auth/' ,{username, password})
+            .then(response => {
+                    localStorage.setItem("toket", JSON.stringify(response.data.token));  
+                    return response.data.token;
+            })
+            .catch(function (error) {
+                return new Response(false, null, "Error", error);
+            });
+        return res;
+  }
   handleLogin(formValue: { username: string; password: string }) {
     const { username, password } = formValue;
-
+    
+    this.handletoket(username, password)
+    
     this.setState({
       message: "",
       loading: true
@@ -49,10 +64,8 @@ export default class LoginForm extends Component<Props, State> {
 
     AuthService.login(username, password).then(
         
-      () => {
-        
-        // this.props.history.push("/about");
-        window.location.reload();
+      () => {      
+        // window.location.href='/user-profile'
       },
       error => {
         const resMessage =

@@ -1,5 +1,4 @@
-import Footer from "../Layout/Footer"
-import Navbarx from "../Layout/Navbar"
+
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -7,7 +6,6 @@ export const Faq = () => {
     const { language } = useSelector((state: RootState) => state.lang);
     return (
         <>
-        <Navbarx/>
             <section className="faq-main pb-6 pt-6">
             <div className="container">
                 <div className="section-title mb-6 text-center w-75 mx-auto">
@@ -187,7 +185,7 @@ export const Faq = () => {
                 </div>
             </div>
             </section>
-        <Footer/>
+    
         </>
     )
 }

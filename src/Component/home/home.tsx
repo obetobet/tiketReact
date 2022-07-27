@@ -6,13 +6,15 @@ import 'swiper/css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import EventList from "../event/list_home"
 import Partner from "./partner";
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
+import { memoize } from "memoize-cache-decorator";
 type resultProps = {
     title: string;
     gambar:string;
     slug:string;
   };
-export default function HomeIndex()  {
+const HomeIndex: React.FC = React.memo(props => {
+    memoize()
     const swiperx = useSwiper();
     const navigationPrevRef = React.useRef<HTMLDivElement>(null)
     const navigationNextRef = React.useRef<HTMLDivElement>(null)
@@ -70,8 +72,7 @@ export default function HomeIndex()  {
                                   
                                   <div className="swiper-slide" >
                                       <div className="slide-inner" >
-                                      
-                                      <img src="https://obet.pythonanywhere.com/media/slider/1.jpg" className="slide-image img-fluid"></img>
+                                      <img src={object.gambar} alt={object.title} className="slide-image img-fluid"></img>
                                           <div className="dot-overlay" />
                                       </div>
                                   </div>
@@ -96,5 +97,5 @@ export default function HomeIndex()  {
         </>
         )
     
-  }
-
+  })
+export default HomeIndex

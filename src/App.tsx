@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BrowserRouter, Routes , Route } from 'react-router-dom';
+import { BrowserRouter, Routes , Route,useParams } from 'react-router-dom';
 
 import About from './Component/about/about';
 import HomeIndex from './Component/home/home';
@@ -16,9 +16,11 @@ import Navbarx from './Component/Layout/Navbar';
 import Footer from './Component/Layout/Footer';
 import ArtikelDetail from './Component/artikel/artikel_detail';
 import Favicon from 'react-favicon'
+import { Profile } from './Component/user/profile';
 interface IProps {}
 interface IState {
   website: WebsiteModel
+  params : any;
 }
 
 
@@ -28,6 +30,7 @@ export default class App extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
+        params: '',
         website: {
             Title: '',      
             Email: '',
@@ -39,6 +42,7 @@ export default class App extends React.Component<IProps, IState> {
             Twitter: '',
             Instagram: '',
             Youtube: '',
+
         }
     }
 
@@ -49,7 +53,7 @@ export default class App extends React.Component<IProps, IState> {
         (rp) => {
             if (rp.Status) {
                 const website = rp.Data;  
-                this.setState({ website: new WebsiteModel(website._id, website.webiste, website.email, website.telp, website.alamat,website.logo,website.favicon,website.facebook,website.twitter,website.instagram,website.youtube)});
+                this.setState({website: new WebsiteModel(website._id, website.webiste, website.email, website.telp, website.alamat,website.logo,website.favicon,website.facebook,website.twitter,website.instagram,website.youtube)});
             } else {
                 toastr.error(rp.Messages);
                 console.log("Messages: " + rp.Messages);
@@ -59,6 +63,11 @@ export default class App extends React.Component<IProps, IState> {
 
     );
 }
+    public authheader()
+    {
+      const userStr = localStorage.getItem("user");
+      return userStr;
+    }
 
   render () {
   return (
@@ -78,7 +87,9 @@ export default class App extends React.Component<IProps, IState> {
                 <Route path="/contact-us" element={<Contact_us/>}></Route>
                 <Route path="*" element={<Error404/>}></Route>
                 <Route   path='/event/detail/:Id'  element={<ArtikelDetail/>}/>
-                {/* <Route path='/event/detail/:id' component={ ArtikelDetail } /></Route> */}
+                {this.authheader() ?<Route path="/user-profile" element={<Profile/>}></Route>:''
+                }
+               
             </Routes >
           <Footer 
           facebook={this.state.website.Facebook}

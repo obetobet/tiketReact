@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Moment from 'moment';
 import { Link,NavLink  } from 'react-router-dom';
 import { FaMapMarkerAlt,FaCalendar,FaClipboardCheck } from 'react-icons/fa';
+import {memoize} from 'memoize-cache-decorator';
 interface IProps {}
 interface IState {
   list: Array<EventModel>;
@@ -16,6 +17,7 @@ interface IState {
 }
 
 class EventList extends React.Component<IProps, IState>  {
+  
     public state: IState = {
         list: new Array<EventModel>(),
         isReady: false,
@@ -34,7 +36,7 @@ class EventList extends React.Component<IProps, IState>  {
 
         };
       }
-    
+      
       public componentDidMount() {
         BaseService.getAll<EventModel>("/event/?limit=6&offset=1/").then((rp) => {
           if (rp.Status) {
@@ -48,6 +50,7 @@ class EventList extends React.Component<IProps, IState>  {
             this.setState(
               { list: list },
               function (){
+                
               }); 
             this.setState({ isReady: true });
           } else {
