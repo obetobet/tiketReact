@@ -11,7 +11,7 @@ type State = {
   email: string,
   password: string,
   successful: boolean,
-  message: string
+  message: any
 };
 
 export default class Register extends Component<Props, State> {
@@ -24,7 +24,7 @@ export default class Register extends Component<Props, State> {
       email: "",
       password: "",
       successful: false,
-      message: ""
+      message: []
     };
   }
 
@@ -101,12 +101,14 @@ export default class Register extends Component<Props, State> {
       last_name 
     ).then(
       response => {
+        console.log(response)
         this.setState({
-          message: response.data.message,
+          message: 'sukses',
           successful: true
         });
       },
       error => {
+        console.log(error.response.data.username)
         const resMessage =
           (error.response &&
             error.response.data &&
@@ -114,16 +116,21 @@ export default class Register extends Component<Props, State> {
           error.message ||
           error.toString();
 
+
+
         this.setState({
           successful: false,
-          message: resMessage
+          message: resMessage,
+          username : error.response.data.username,
+          email : error.response.data.email,
+          password : error.response.data.password,
         });
       }
     );
   }
 
   render() {
-    const { successful, message } = this.state;
+    const { successful, message,username,email,password } = this.state;
 
     const initialValues = {
       username: "",
@@ -152,7 +159,12 @@ export default class Register extends Component<Props, State> {
                             name="username"
                             component="div"
                             className="alert alert-danger"
-                            />
+                            /><div className={successful ? "alert alert-success" : "alert alert-danger" }role="alert">{username}</div>
+                            
+                                
+                           
+                            
+                            
                         </div>
                         <div className="col-lg-6">
                             <Field name="email" type="email" className="form-control" id="femail"  placeholder="Email"/>
@@ -160,7 +172,7 @@ export default class Register extends Component<Props, State> {
                             name="email"
                             component="div"
                             className="alert alert-danger"
-                            />
+                            /><div className={successful ? "alert alert-success" : "alert alert-danger" }role="alert">{email}</div>
                         </div>
                        
                     </div>
@@ -195,8 +207,9 @@ export default class Register extends Component<Props, State> {
                             <ErrorMessage
                             name="password"
                             component="div"
+                            
                             className="alert alert-danger"
-                            />
+                            /><div className={successful ? "alert alert-success" : "alert alert-danger" }role="alert">{password}</div>
                         </div>
                         <div className="col-lg-6">
                             <Field name="password2" type="password" className="form-control" id="lrepass"  placeholder="Re Password"/>
@@ -220,18 +233,7 @@ export default class Register extends Component<Props, State> {
             </div>
             )}
 
-            {message && (
-            <div className="form-group">
-                <div
-                className={
-                    successful ? "alert alert-success" : "alert alert-danger"
-                }
-                role="alert"
-                >
-                {message}
-                </div>
-            </div>
-            )}
+           
         </Form>
         </Formik>
       

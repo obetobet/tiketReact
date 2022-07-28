@@ -65,7 +65,7 @@ export default class LoginForm extends Component<Props, State> {
     AuthService.login(username, password).then(
         
       () => {      
-        // window.location.href='/user-profile'
+        window.location.href='/user-profile'
       },
       error => {
         const resMessage =

@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Routes , Route,useParams } from 'react-router-dom';
-
 import About from './Component/about/about';
 import HomeIndex from './Component/home/home';
 import {EventList} from './Component/event/list';
@@ -17,6 +16,7 @@ import Footer from './Component/Layout/Footer';
 import ArtikelDetail from './Component/artikel/artikel_detail';
 import Favicon from 'react-favicon'
 import { Profile } from './Component/user/profile';
+import {Order} from './Component/blog/blog_detail';
 interface IProps {}
 interface IState {
   website: WebsiteModel
@@ -86,7 +86,8 @@ export default class App extends React.Component<IProps, IState> {
                 <Route path="/faq" element={<Faq/>}></Route>
                 <Route path="/contact-us" element={<Contact_us/>}></Route>
                 <Route path="*" element={<Error404/>}></Route>
-                <Route   path='/event/detail/:Id'  element={<ArtikelDetail/>}/>
+                <Route path='/artikel/detail/:Id' element ={<ArtikelDetail/> }/>
+                <Route path="order/:orderId" element={<Order/>} />
                 {this.authheader() ?<Route path="/user-profile" element={<Profile/>}></Route>:''
                 }
                

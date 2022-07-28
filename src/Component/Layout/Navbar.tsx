@@ -1,13 +1,12 @@
 import React, { useCallback, useState, useEffect, useRef, FC } from 'react';
 import { Link,NavLink  } from 'react-router-dom';
-import Profile  from '../user/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { setLanguage } from '../../store/actions/langActions';
 import { translate } from '../../i18n';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import {ListMobile} from '../home/list.mobile';
+import AuthService from "../../service/auth.service";
 type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
@@ -20,20 +19,19 @@ export const Navbarx =( props : NavbarProps) =>{
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownEl = useRef<HTMLUListElement>(null);
-    const [show,setShow]=useState(false)
+    const [show,setShow]=useState(false);
+    const [userReady,setuserReady]=useState(false);
 
     const chooseLanguageHandler = (value: string) => {
         setShowDropdown(false);
         setShow(!show)
         dispatch(setLanguage(value));
       }
+
+    const currentUser = AuthService.getCurrentUser();
  
   return (  
     <>
-    
-        {/* <ListMobile/>  */}
-        
-
     <header className="main_header_area">
     <div className="header_menu" id="header_menu">
         <nav className="navbar navbar-default" >
@@ -76,7 +74,11 @@ export const Navbarx =( props : NavbarProps) =>{
                             </Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Profile/>
+                    {(currentUser) ?
+                    <NavLink className="me-3 userlog"  to='/user-profile'><i className="icon-user" /> </NavLink>
+                        :
+                        <a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"  className="me-3 userlog" ><i className="icon-user" /> Login</a>
+                    }
                 </div>
                 <div id="slicknav-mobile">
                     <div className="slicknav_menu">
@@ -116,7 +118,14 @@ export const Navbarx =( props : NavbarProps) =>{
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
-                            <li><Profile/></li>
+                            <li>
+                            {(currentUser) ?
+                                <NavLink className="me-3 userlog" onClick={() => setShow(!show)}  to='/user-profile'><i className="icon-user" /> </NavLink>
+                                    :
+                                    <a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"  className="me-3 userlog" ><i className="icon-user" /> Login</a>
+                                }
+
+                            </li>
                         </ul>
                             
                             :null
@@ -134,6 +143,5 @@ export const Navbarx =( props : NavbarProps) =>{
 
   </>
   );
-                    }
-// }
+ }
 export default Navbarx;

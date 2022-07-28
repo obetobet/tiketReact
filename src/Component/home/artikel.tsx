@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import ArtikelList from '../artikel/artikel_list'
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';

@@ -6,8 +6,9 @@ import 'swiper/css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import EventList from "../event/list_home"
 import Partner from "./partner";
-import Image from 'react-bootstrap/Image';
 import { memoize } from "memoize-cache-decorator";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 type resultProps = {
     title: string;
     gambar:string;
@@ -72,7 +73,7 @@ const HomeIndex: React.FC = React.memo(props => {
                                   
                                   <div className="swiper-slide" >
                                       <div className="slide-inner" >
-                                      <img src={object.gambar} alt={object.title} className="slide-image img-fluid"></img>
+                                      <LazyLoadImage className="slide-image img-fluid" effect="opacity" alt={object.title}  src={object.gambar}/>
                                           <div className="dot-overlay" />
                                       </div>
                                   </div>

@@ -9,6 +9,8 @@ import 'swiper/css';
 import { History } from 'history';
 import Moment from 'moment';
 import { useParams,useSearchParams,useLocation  } from 'react-router-dom';
+import * as qs from "query-string";
+
 type IProps = {
   match?:{ 
     isExact: boolean
@@ -68,8 +70,8 @@ class ArtikelDetail extends React.Component<IProps,IState> {
             
               if (rp.Status) {
                   const p = rp.Data; 
-                  // const  params  = this.props.match?.params;
-                  console.log(this.props.match)
+                  const params = qs.parse(window.location.search);
+                  console.log(params);
                   this.setState(
                     { Id : p.id,Category : p.title_Category,Gambar: p.gambar,Title: p.title,Description: p.description, Date: p.date,Author: p.author, Visit: p.visit,Translations_en : p.translations.en, Translations_id : p.translations.id},                        );
                    

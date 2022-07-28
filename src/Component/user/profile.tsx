@@ -71,8 +71,6 @@ export const Profile  = (props : any) => {
             setextend(rex.extend)
             setaddress(rex.user)
             setusername(rex.username)
-            
-            console.log(address)
       };
   
       api();
