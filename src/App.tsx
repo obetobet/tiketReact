@@ -17,9 +17,10 @@ import ArtikelDetail from './Component/artikel/artikel_detail';
 import Favicon from 'react-favicon'
 import { Profile } from './Component/user/profile';
 import {Order} from './Component/blog/blog_detail';
+import EventDetail from './Component/event/detail';
 interface IProps {}
 interface IState {
-  website: WebsiteModel
+  website: WebsiteModel;
   params : any;
 }
 
@@ -87,6 +88,7 @@ export default class App extends React.Component<IProps, IState> {
                 <Route path="/contact-us" element={<Contact_us/>}></Route>
                 <Route path="*" element={<Error404/>}></Route>
                 <Route path='/artikel/detail/:Id' element ={<ArtikelDetail/> }/>
+                <Route path='/event/detail/:Id' element ={<EventDetail/> }/>
                 <Route path="order/:orderId" element={<Order/>} />
                 {this.authheader() ?<Route path="/user-profile" element={<Profile/>}></Route>:''
                 }

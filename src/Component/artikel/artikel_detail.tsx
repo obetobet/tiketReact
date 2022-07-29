@@ -8,21 +8,24 @@ import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
 import { History } from 'history';
 import Moment from 'moment';
-import { useParams,useSearchParams,useLocation  } from 'react-router-dom';
+import { useParams,useSearchParams,useLocation,useNavigate } from 'react-router-dom';
 import * as qs from "query-string";
 
 type IProps = {
-  match?:{ 
-    isExact: boolean
-    params: {
-        id:string
-    },
-    path: string,
-    url: string,
-}
+  params?:{
+    Id:string
+  }
 }
 
-
+export const withRouter = (Component: React.ComponentType<any>) => {
+  const WithRouter = (props: any) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = useParams();
+    return <Component {...props} location={location} navigate={navigate} params={params} />;
+  }
+  return WithRouter;
+}
 interface IState {
   // person: ArtikelModel,
   Id: string,
@@ -65,16 +68,14 @@ class ArtikelDetail extends React.Component<IProps,IState> {
   
     public componentDidMount() { 
       
-      BaseService.getdetail<ArtikelModel>('/artikel/','4').then(
+      BaseService.getdetail<ArtikelModel>('/artikel/',this.props.params?.Id).then(
           (rp) => {
             
               if (rp.Status) {
                   const p = rp.Data; 
-                  const params = qs.parse(window.location.search);
-                  console.log(params);
+                  console.log(p)
                   this.setState(
-                    { Id : p.id,Category : p.title_Category,Gambar: p.gambar,Title: p.title,Description: p.description, Date: p.date,Author: p.author, Visit: p.visit,Translations_en : p.translations.en, Translations_id : p.translations.id},                        );
-                   
+                    { Id : p.id,Category : p.title_Category,Gambar: p.gambar,Title: p.title,Description: p.description, Date: p.date,Author: p.author, Visit: p.visit,Translations_en : p.translations.en, Translations_id : p.translations.id},                        );              
                 } else {
                   toastr.error(rp.Messages);
                   console.log("Messages: " + rp.Messages);
@@ -97,14 +98,13 @@ class ArtikelDetail extends React.Component<IProps,IState> {
          <section className="blog">
         <div className="container">
           <div className="row flex-row-reverse">
-            <div className="col-lg-9 mb-4">
+            <div className="col-lg-2 mb-4"></div>
+            <div className="col-lg-8 mb-4">
               <div className="blog-single">
                 <div className="blog-wrapper">
                   <h2 className="lh-sm">{localStorage.getItem('language') == 'Indonesia' ? this.state.Translations_id.title : this.state.Translations_en.title}</h2>
                   <div className="blog-content first-child-cap">
-                    <p className="mb-3">The property, complete with a 30-seat screening room, a 100-seat amphitheater and a swimming pond with sandy beach and outdoor shower, was asking about $40 million. Lorem ipsum dolor sit amet, consectetur adipis Vi ales elit vitae lo bortis faucibus. Lorem ipsum dolor sit amet, conse dolor sit amet, consectetu ctetur adipis Viales. Lorem ipsum dolor sit amet, cons sit amet, consectetur adi ectetur adipis Vi.<br /><br />
-                     
-                      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+                    <p className="mb-3">{localStorage.getItem('language') == 'Indonesia' ? this.state.Translations_id.description : this.state.Translations_en.description}</p>
                   </div>
                   <div className="blog-quote mb-4 rounded">
                     <p className="white">“To take a trivial example, which ever undertakes laborious physical work exercise, except obtain some advantage blinded” </p>
@@ -146,37 +146,6 @@ class ArtikelDetail extends React.Component<IProps,IState> {
                       </ul>
                     </div>
                   </div>
-                </div>
-                <div className="blog-author mb-4 bg-grey border rounded">
-                  <div className="blog-author-item">
-                    <div className="row d-flex justify-content-between align-items-center">
-                      <div className="col-md-3 col-sm-3 col-xs-12">
-                        <div className="blog-thumb text-center position-relative">
-                          <img src="images/reviewer/1.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="col-md-9 col-sm-9 col-xs-12">
-                        <h3 className="title pink"><a href="#">About Author <span>Graphic Designer</span></a></h3>
-                        <p className="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sceler neque in euismod. Nam vitae urnasodales neque in faucibus.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="blog-next mb-4 d-sm-flex align-items-center rounded">
-                  <a href="#" className="d-block bg-theme">
-                    <div className="prev ps-4">
-                      <i className="fa fa-arrow-left white" />
-                      <p className="m-0 white">Previous Post</p>
-                      <p className="m-0 white">The bedding was hardly able</p>
-                    </div>
-                  </a>
-                  <a href="#" className="d-block bg-grey">
-                    <div className="next pr-4 text-right">
-                      <i className="fa fa-arrow-right" />
-                      <p className="m-0">Previous Post</p>
-                      <p className="m-0">The bedding was hardly able</p>
-                    </div>
-                  </a>
                 </div>
                 <div className="single-comments single-box mb-4">
                   <h4 className="mb-4">Showing 16 verified guest comments</h4>
@@ -260,40 +229,8 @@ class ArtikelDetail extends React.Component<IProps,IState> {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 mb-4">
-              <div className="sidebar-sticky">
-                <div className="detail-sidebar">
-                  <div className="mag-image mb-2 position-relative">
-                    <img src={this.state.Gambar} width={300} alt="Image" className="rounded" />
-                    <div className="video-button text-center position-absolute top-50 start-0 end-0 z-index1">
-                      <div className="call-button text-center">
-                        <button type="button" className="play-btn js-video-button" data-video-id={152879427} data-channel="vimeo">
-                          <i className="fa fa-play bg-blue" />
-                        </button>
-                      </div>
-                      <div className="video-figure" />
-                    </div>
-                  </div>
-                  <div className="detail-sidebar-item border-b pb-2 mb-2">
-                    <h5><a href="detail-1.html">Some native species quickly disappeared from Biotest Lake</a><span><a href="#">John Doe</a></span></h5>
-                  </div>
-                  <div className="detail-sidebar-item border-b pb-2 mb-2">
-                    <h5><a href="detail-1.html">Some native species quickly disappeared from Biotest Lake</a><span><a href="#">John Doe</a></span></h5>
-                  </div>
-                  <div className="detail-sidebar-item border-b pb-2 mb-2">
-                    <h5><a href="detail-1.html">Some native species quickly disappeared from Biotest Lake</a><span><a href="#">John Doe</a></span></h5>
-                  </div>
-                  <div id="sidebar1">
-                    <div className="sidebar-icons">
-                      <a href="#" className="me-1"><i className="fa fa-heart" aria-hidden="true"><span> 1.2K</span></i></a>
-                      <a href="#" className="me-1"><i className="fa fa-bookmark" aria-hidden="true" /></a>
-                      <a href="#" className="me-1"><i className="fab fa-facebook" aria-hidden="true" /></a>
-                      <a href="#"><i className="fab fa-twitter" aria-hidden="true" /></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="col-lg-2 mb-4"></div>
+            
           </div>
         </div>
       </section>
@@ -302,4 +239,4 @@ class ArtikelDetail extends React.Component<IProps,IState> {
 }
 }
 
-export default ArtikelDetail;
+export default  withRouter(ArtikelDetail);

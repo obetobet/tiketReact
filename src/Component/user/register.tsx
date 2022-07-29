@@ -101,7 +101,6 @@ export default class Register extends Component<Props, State> {
       last_name 
     ).then(
       response => {
-        console.log(response)
         this.setState({
           message: 'sukses',
           successful: true

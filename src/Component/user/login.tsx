@@ -1,16 +1,16 @@
 import { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { History } from 'history';
 import AuthService from "../../service/auth.service";
 import { RouteComponentProps,} from '@reach/router';
 import Response from "../../models/response";
-  import axios from "axios";
-interface RouterProps {
-  history: string;
-}
+import axios from "axios";
+import { useParams,useLocation,useNavigate } from 'react-router-dom';
 
-type Props = RouteComponentProps<RouterProps>;
+
+type Props = {
+  navigate : any
+};
 
 type State = {
   username: string,
@@ -19,7 +19,17 @@ type State = {
   message: string
 };
 
-export default class LoginForm extends Component<Props, State> {
+export const withRouter = (Component: React.ComponentType<any>) => {
+  const WithRouter = (props: any) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = useParams();
+    return <Component {...props} location={location} navigate={navigate} params={params} />;
+  }
+  return WithRouter;
+}
+
+class LoginForm extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
@@ -64,8 +74,9 @@ export default class LoginForm extends Component<Props, State> {
 
     AuthService.login(username, password).then(
         
-      () => {      
-        window.location.href='/user-profile'
+      () => { 
+        this.props.navigate('/user-profile', { replace: true })
+        window.location.reload()
       },
       error => {
         const resMessage =
@@ -141,3 +152,5 @@ export default class LoginForm extends Component<Props, State> {
     );
   }
 }
+
+export default withRouter(LoginForm)

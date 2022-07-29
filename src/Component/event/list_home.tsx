@@ -74,9 +74,11 @@ class EventList extends React.Component<IProps, IState>  {
                     <div className="row" >
                         <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="item-inner-image text-start">
-                              <LazyLoadImage   alt='{object.Title}'
+                            <Link to={"/event/detail/" + object.Id} >
+                              <LazyLoadImage   alt={object.Title}
                                 effect="blur"
                                 src={object.Image} />
+                            </Link>
                             <h5 className="mb-0 text-center" style={{padding:"15px"}}>{object.Title}</h5>
                             </div>
                         </div>

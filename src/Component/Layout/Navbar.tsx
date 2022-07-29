@@ -7,6 +7,7 @@ import { translate } from '../../i18n';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import AuthService from "../../service/auth.service";
+import { useLocation,useNavigate } from 'react-router-dom';
 type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
@@ -14,7 +15,8 @@ type NavbarProps = {
   }
 
 export const Navbarx =( props : NavbarProps) =>{
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const { language } = useSelector((state: RootState) => state.lang);
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
@@ -26,6 +28,7 @@ export const Navbarx =( props : NavbarProps) =>{
         setShowDropdown(false);
         setShow(!show)
         dispatch(setLanguage(value));
+        navigate(location.pathname, { replace: true });
       }
 
     const currentUser = AuthService.getCurrentUser();

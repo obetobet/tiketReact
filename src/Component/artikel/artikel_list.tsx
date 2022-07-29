@@ -1,13 +1,14 @@
 import BaseService from "../../service/service";
 import * as toastr from "toastr";
 import {ArtikelModel} from "../../models/artikel"
-import React from 'react';
+import React,{ Component} from 'react';
 import {Swiper,  SwiperSlide } from 'swiper/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Navigation,Autoplay  } from 'swiper';
 import 'swiper/css';
 import Moment from 'moment';
-import { Link,NavLink  } from 'react-router-dom';
+import { Link,NavLink,useParams,useNavigate,useLocation  } from 'react-router-dom';
+
 interface IProps {}
 interface IState {
   list: Array<ArtikelModel>;
@@ -17,7 +18,15 @@ interface IState {
   navigationNextRef?:any;
   
 }
-
+export const withRouter = (Component: React.ComponentType<any>) => {
+  const WithRouter = (props: any) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = useParams();
+    return <Component {...props} location={location} navigate={navigate} params={params} />;
+  }
+  return WithRouter;
+}
 class ArtikelList extends React.Component<IProps, IState>  {
     public state: IState = {
         list: new Array<ArtikelModel>(),
@@ -164,4 +173,4 @@ class ArtikelList extends React.Component<IProps, IState>  {
 }
 }
 
-export default ArtikelList;
+export default withRouter(ArtikelList);
