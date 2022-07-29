@@ -76,7 +76,7 @@ export const EventList = (props : EventProps) =>{
                       <div className="color-overlay" />
                     </div>
                   </div>
-                </div>
+                  </div>
                 
 
                   );
