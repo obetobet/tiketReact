@@ -6,6 +6,7 @@ import Moment from 'moment';
 import { Link,NavLink  } from 'react-router-dom';
 import { FaMapMarkerAlt,FaCalendar,FaClipboardCheck } from 'react-icons/fa';
 import {memoize} from 'memoize-cache-decorator';
+import {SkeletonCardEventHome} from "./Sekeleton";
 interface IProps {}
 interface IState {
   list: Array<EventModel>;
@@ -13,13 +14,14 @@ interface IState {
   hasError: Boolean;
   navigationPrevRef?: any;
   navigationNextRef?:any;
-  
+  isLoading:boolean;
 }
 
 class EventList extends React.Component<IProps, IState>  {
   
     public state: IState = {
         list: new Array<EventModel>(),
+        isLoading:true,
         isReady: false,
         hasError: false,
         navigationPrevRef : React.createRef(),
@@ -29,6 +31,7 @@ class EventList extends React.Component<IProps, IState>  {
         super(props);
         this.state = {
           isReady: false,
+          isLoading:true,
           list: Array<EventModel>(),
           hasError: false,
           navigationPrevRef :React.createRef(),
@@ -48,7 +51,7 @@ class EventList extends React.Component<IProps, IState>  {
             });
     
             this.setState(
-              { list: list },
+              { list: list,isLoading:false },
               function (){
                 
               }); 
@@ -126,6 +129,8 @@ class EventList extends React.Component<IProps, IState>  {
         <>
         <section className="trending pt-6 pb-0 bg-lgrey">
             <div className="container">
+            {this.state.isLoading && <SkeletonCardEventHome Cards={this.state.list.length}/>}
+              
             <div className="row">
                 {this.tabRow()}
                 

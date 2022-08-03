@@ -41,6 +41,7 @@
     "react-icons": "^4.4.0",
     "react-intl": "^6.0.5",
     "react-lazy-load-image-component": "^1.5.4",
+    "react-loading-skeleton": "^3.1.0",
     "react-pro-sidebar": "^0.7.1",
     "react-range": "^1.8.14",
     "react-redux": "^8.0.2",

@@ -8,6 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import AuthService from "../../service/auth.service";
 import { useLocation,useNavigate } from 'react-router-dom';
+import { FaSignInAlt,FaRegUser } from "react-icons/fa";
 type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
@@ -57,9 +58,9 @@ export const Navbarx =( props : NavbarProps) =>{
                     </ul>
                 </div>
                     
-                <div className="register-login d-flex align-items-center">               
+                <div className="register-login d-flex align-items-center ">               
                     <Dropdown>
-                        <Dropdown.Toggle variant="default" style={{fontSize:'15px', fontFamily:"poppins,sans-serif",color:'#777'}}>
+                        <Dropdown.Toggle variant="default" className='Dropdownx' style={{fontSize:'15px', fontFamily:"poppins,sans-serif",color:'#777'}}>
                             {
                                 language =='English' ? 
                                 <span><img alt="United States" style={{width:'20px'}} src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg"/> English</span>: 
@@ -78,7 +79,7 @@ export const Navbarx =( props : NavbarProps) =>{
                         </Dropdown.Menu>
                     </Dropdown>
                     {(currentUser) ?
-                    <NavLink className="me-3 userlog"  to='/user-profile'><i className="icon-user" /> </NavLink>
+                    <NavLink className="me-3 userlog "   to='/user-profile'><i className="icon-user" /></NavLink>
                         :
                         <a  href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"  className="me-3 userlog" ><i className="icon-user" /> Login</a>
                     }

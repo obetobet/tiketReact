@@ -7,23 +7,25 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Image from 'react-bootstrap/Image'
 import CountUp from 'react-countup';
+import SkeletonCard from "./Sekeleton";
 type AboutProps = {
     Trans_id? : any
     Trans_en? : any
     Gambar? : any
     Counter? : any
+    isLoading:boolean
 }
 export const DetailAbout = (props : AboutProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
-
   return (
     <div className="about-image-box">
       <div className="row d-flex align-items-center justify-content-between">
+      {props.isLoading && <SkeletonCard/>}
         <div className="col-lg-6 ">
           <div className="about-content text-center text-lg-start">
           <h4 className="theme d-inline-block mb-0" style={{textTransform:"capitalize"}}>{translate('about', language)}</h4>
             <h2 className="border-b mb-2 pb-1">{localStorage.getItem('language') == 'Indonesia' ? props.Trans_id.title : props.Trans_en.title}  </h2>
-            <p className="border-b mb-2 pb-2"> {localStorage.getItem('language') == 'Indonesia' ? props.Trans_id.description : props.Trans_en.description} </p>
+            <p className="border-b mb-2 pb-2"> {localStorage.getItem('language') == 'Indonesia' ? props.Trans_id.description : props.Trans_en.description } </p>
               <div className="about-listing">
                 <ul className="d-flex justify-content-between">
                   <li><i className="icon-location-pin theme" />{translate('Tour Guide',language)} </li>

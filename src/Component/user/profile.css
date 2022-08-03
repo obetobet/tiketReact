@@ -1,6 +1,10 @@
 
 
-  
+  .Dropdownx{
+    box-shadow: 0 7px 14px rgb(50 50 93 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+  }
+
+  .fa-x{text-shadow:3px 6px rgba(255,165,0,.75)}
   
   .ProfUser label {
     display: inline-block;
