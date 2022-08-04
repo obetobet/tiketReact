@@ -15,6 +15,7 @@ interface IState {
   navigationPrevRef?: any;
   navigationNextRef?:any;
   isLoading:boolean;
+  iscount:number;
 }
 
 class EventList extends React.Component<IProps, IState>  {
@@ -24,6 +25,7 @@ class EventList extends React.Component<IProps, IState>  {
         isLoading:true,
         isReady: false,
         hasError: false,
+        iscount:0,
         navigationPrevRef : React.createRef(),
         navigationNextRef : React.createRef()
       };
@@ -31,6 +33,7 @@ class EventList extends React.Component<IProps, IState>  {
         super(props);
         this.state = {
           isReady: false,
+          iscount:0,
           isLoading:true,
           list: Array<EventModel>(),
           hasError: false,
@@ -51,7 +54,7 @@ class EventList extends React.Component<IProps, IState>  {
             });
     
             this.setState(
-              { list: list,isLoading:false },
+              { list: list,isLoading:false,iscount:list.length },
               function (){
                 
               }); 
@@ -78,9 +81,10 @@ class EventList extends React.Component<IProps, IState>  {
                         <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="item-inner-image text-start">
                             <Link to={"/event/detail/" + object.Id} >
-                              <LazyLoadImage   alt={object.Title}
+                              <img alt={object.Title} src={object.Image}/>
+                              {/* <LazyLoadImage   alt={object.Title}
                                 effect="blur"
-                                src={object.Image} />
+                                src={object.Image} /> */}
                             </Link>
                             <h5 className="mb-0 text-center" style={{padding:"15px"}}>{object.Title}</h5>
                             </div>
@@ -129,8 +133,8 @@ class EventList extends React.Component<IProps, IState>  {
         <>
         <section className="trending pt-6 pb-0 bg-lgrey">
             <div className="container">
-            {this.state.isLoading && <SkeletonCardEventHome Cards={this.state.list.length}/>}
-              
+            {this.state.isLoading && <SkeletonCardEventHome Cards={6}/>}
+            
             <div className="row">
                 {this.tabRow()}
                 

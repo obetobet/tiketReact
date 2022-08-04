@@ -14,6 +14,7 @@ interface IState {
   list: Array<ArtikelModel>;
   isReady: Boolean;
   hasError: Boolean;
+  isLoading:boolean;
   navigationPrevRef?: any;
   navigationNextRef?:any;
   
@@ -31,6 +32,7 @@ class ArtikelList extends React.Component<IProps, IState>  {
     public state: IState = {
         list: new Array<ArtikelModel>(),
         isReady: false,
+        isLoading:true,
         hasError: false,
         navigationPrevRef : React.createRef(),
         navigationNextRef : React.createRef()
@@ -39,6 +41,7 @@ class ArtikelList extends React.Component<IProps, IState>  {
         super(props);
         this.state = {
           isReady: false,
+          isLoading:true,
           list: Array<ArtikelModel>(),
           hasError: false,
           navigationPrevRef :React.createRef(),
@@ -58,7 +61,7 @@ class ArtikelList extends React.Component<IProps, IState>  {
             });
     
             this.setState(
-              { list: list },
+              { list: list,isLoading:false,},
               function (){
               }); 
             this.setState({ isReady: true });

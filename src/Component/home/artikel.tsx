@@ -3,12 +3,26 @@ import ArtikelList from '../artikel/artikel_list'
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { SkeletonCardArtikelHome } from './Sekeleton';
+
+
+
+
 export default function Artikel () {
     const { language } = useSelector((state: RootState) => state.lang);
+    const [isLoading, setIsLoading] = React.useState(true);
 
+    React.useEffect(() => {
+        
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+        
+        
+        }, []);
       return (
         <>  
-            <section className="trending bg-grey pt-17 pb-6">
+            <section className="trending  pt-17 pb-6">
             <div
                 className="section-shape top-0"
                 style={{ backgroundImage: "url(images/shape8.png)" }}
@@ -24,8 +38,8 @@ export default function Artikel () {
                 </div>
                 <div className="trend-box">
                 <div className="row item-slider slick-initialized slick-slider">
-                    
-
+                    {/* <SkeletonCardArtikelHome/> */}
+                    {isLoading && <SkeletonCardArtikelHome/>}
                     <ArtikelList/>
                     
                     

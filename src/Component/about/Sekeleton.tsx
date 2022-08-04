@@ -3,7 +3,6 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 const SkeletonCard = () => {
     return (
-    <div className="about-image-box">
       <div className="row d-flex align-items-center justify-content-between">
         <div className="col-lg-6">
             <div className='row'>
@@ -38,7 +37,7 @@ const SkeletonCard = () => {
             <Skeleton  height={450}/>
           </div>
         </div>
-        {/* <div className="col-lg-12">
+        <div className="col-lg-12">
             <div className="counter-main w-75 float-start z-index3 position-relative">
                 <div className="counter p-4 pb-0 box-shadow bg-white rounded mt-minus">
                     <div className='row'>
@@ -57,9 +56,8 @@ const SkeletonCard = () => {
                     </div> 
                 </div>
             </div>     
-        </div> */}
+        </div>
       </div>
-    </div>
         
 
     );

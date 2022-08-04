@@ -8,6 +8,7 @@ import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
 import Moment from 'moment';
 import { useParams,useLocation,useNavigate } from 'react-router-dom';
+import { SkeletonCardEventDetails } from "./Sekeleton";
 
 type IProps = {
   params?:{
@@ -36,7 +37,7 @@ interface IState {
   Location : string,
   Latitude : string,
   Longitude : string,
-
+  isLoading:boolean,
   Galery:any,
   Tiket:any,
   
@@ -63,6 +64,7 @@ class EventDetail extends React.Component<IProps,IState> {
           Longitude : '',
           Galery:[],
           Tiket:[],
+          isLoading:true,
             
         }
 
@@ -79,7 +81,7 @@ class EventDetail extends React.Component<IProps,IState> {
                   const p = rp.Data; 
                   console.log(p)
                   this.setState(
-                    { Id : p.id,Category : p.title_Category,Gambar: p.image,Title: p.title,Description: p.description, Date: p.date, Visit: p.visit,Galery : p.galery, Tiket : p.tiket,Latitude:p.latitude,Longitude:p.longitude,Location:p.location},                        );              
+                    {isLoading:false, Id : p.id,Category : p.title_Category,Gambar: p.image,Title: p.title,Description: p.description, Date: p.date, Visit: p.visit,Galery : p.galery, Tiket : p.tiket,Latitude:p.latitude,Longitude:p.longitude,Location:p.location},                        );              
                 } else {
                   toastr.error(rp.Messages);
                   console.log("Messages: " + rp.Messages);
@@ -101,6 +103,7 @@ class EventDetail extends React.Component<IProps,IState> {
         <>
         <section className="trending pt-6 pb-0 bg-lgrey">
           <div className="container">
+          {(this.state.isLoading) ? <SkeletonCardEventDetails /> :
             <div className="row">
               <div className="col-lg-8">
                 <div className="single-content">
@@ -328,8 +331,11 @@ class EventDetail extends React.Component<IProps,IState> {
                   </div>
                 </div>
               </div>
+              
             </div>
+            }
           </div>
+          
         </section>
 
         </>

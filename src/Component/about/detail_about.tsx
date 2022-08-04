@@ -18,9 +18,10 @@ type AboutProps = {
 export const DetailAbout = (props : AboutProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
   return (
+    
     <div className="about-image-box">
+      {props.isLoading ? <SkeletonCard/>:
       <div className="row d-flex align-items-center justify-content-between">
-      {props.isLoading && <SkeletonCard/>}
         <div className="col-lg-6 ">
           <div className="about-content text-center text-lg-start">
           <h4 className="theme d-inline-block mb-0" style={{textTransform:"capitalize"}}>{translate('about', language)}</h4>
@@ -81,7 +82,9 @@ export const DetailAbout = (props : AboutProps) =>{
                     </div>
                   </div>
         </div>
+        
       </div>
+      }
     </div>
   );
 
