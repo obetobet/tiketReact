@@ -8,6 +8,7 @@ import EventList from "../event/list_home"
 import Partner from "./partner";
 import { memoize } from "memoize-cache-decorator";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { SkeletonHome } from "./Sekeleton";
 
 type resultProps = {
     title: string;
@@ -21,6 +22,7 @@ const HomeIndex: React.FC = React.memo(props => {
     const navigationNextRef = React.useRef<HTMLDivElement>(null)
 
     const [result, setResult] = useState<resultProps[]>([]);
+    const [isLoading, setisLoading] = useState(true);
     useEffect(() => {
     const api = async () => {
       const data = await fetch("https://obet.pythonanywhere.com/v1/slider/", {
@@ -31,6 +33,7 @@ const HomeIndex: React.FC = React.memo(props => {
       });
       const jsonData = await data.json();
       setResult(jsonData);
+      setisLoading(false);
     };
 
     api();
@@ -51,46 +54,51 @@ const HomeIndex: React.FC = React.memo(props => {
               </Helmet>
             </HelmetProvider>
             <section className="banner overflow-hidden">
+            {(isLoading) ? <SkeletonHome/> 
+                : 
                 <div className="slider top10">
+                
+                  
                     <div className="swiper-container">
-                    <div className="swiper-wrapper">
-                    <Swiper
-                        navigation={{
-                            prevEl: navigationPrevRef.current,
-                            nextEl: navigationNextRef.current,
-                          }}
-                        slidesPerView={1}
-                        modules={[Navigation,Autoplay]}
-                        speed= {1000}
-                        
-                        autoplay={{
-                            delay: 5000,
-                            disableOnInteraction: false,
-                          }}>
+                      <div className="swiper-wrapper">
+                      <Swiper
+                          navigation={{
+                              prevEl: navigationPrevRef.current,
+                              nextEl: navigationNextRef.current,
+                            }}
+                          slidesPerView={1}
+                          modules={[Navigation,Autoplay]}
+                          speed= {1000}
+                          
+                          autoplay={{
+                              delay: 5000,
+                              disableOnInteraction: false,
+                            }}>
 
-                      {result.map(function (object, i) {
-                              return  <SwiperSlide key={i}>
-                                  
-                                  <div className="swiper-slide" >
-                                      <div className="slide-inner" >
-                                      <LazyLoadImage className="slide-image img-fluid" effect="opacity" alt={object.title}  src={object.gambar}/>
-                                          <div className="dot-overlay" />
-                                      </div>
-                                  </div>
-                              </SwiperSlide>
-                              })};
-                        
-            </Swiper>
-                        
-                        
-                        
+                        {result.map(function (object, i) {
+                                return  <SwiperSlide key={i}>
+                                    
+                                    <div className="swiper-slide" >
+                                        <div className="slide-inner" >
+                                        <img className="slide-image img-fluid" alt={object.title}  src={object.gambar}/>
+                                            <div className="dot-overlay" />
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                })};
+                          
+              </Swiper>
+                          
+                          
+                          
 
+                      </div>
                     </div>
-                    </div>
+                
                     <div className='swiper-button-next' ref={navigationNextRef}></div>
                     <div className='swiper-button-prev' ref={navigationPrevRef} ></div>
                 </div>
-                
+                }
             </section>
             <EventList/>
             <Artikel/>

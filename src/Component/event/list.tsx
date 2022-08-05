@@ -8,6 +8,7 @@ import { RootState } from '../../store';
 import Moment from 'moment';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { SkeletonEventList } from './Sekeleton';
 
 type EventProps = {
   title : string
@@ -17,6 +18,7 @@ export const EventList = (props : EventProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
 
   const [result, setResult] = useState([]);
+  const [isLoading, setisLoading] = useState(true);
   
     useEffect(() => {
     const api = async () => {
@@ -25,6 +27,7 @@ export const EventList = (props : EventProps) =>{
       });
       const jsonData = await data.json();
       setResult(jsonData.results);
+      setisLoading(false);
     };
 
     api();
@@ -48,30 +51,28 @@ export const EventList = (props : EventProps) =>{
 
 
       <section className="trending pb-0 pt-6">
+      {(isLoading) ? <SkeletonEventList Cards={8}/> :
         <div className="container">
+        
           <div className="section-title mb-6 w-50 mx-auto text-center">
-            {/* <h4 className="mb-1 theme1">Top Destinations</h4> */}
             <h2 className="mb-1">{translate('event_list', language)}</h2>
-           
-            {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p> */}
           </div>
+         
           <div className="row align-items-center">
-
             {result.map((value :any ,i) => {
                 return (   
-                  <div className="col-lg-4 col-md-6 col-sm-6 mb-4" key={i}>
+                  <div className="col-lg-3 col-md-6 col-sm-6 mb-3" key={i}>
                   <div className="trend-item1">
                     <div className="trend-image position-relative rounded">
                     <LazyLoadImage
                                 alt='image'
-                                effect="blur"
                                 src={value.image} />
                       <div className="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
-                        <div className="trend-content-title">
+                        {/* <div className="trend-content-title">
                           <h4 className="mb-0"><a href="#" className="theme1">{value.title}</a></h4>
                           <h6 className="mb-0 white"><i className="icon-location-pin" />{value.location}</h6>
                         </div>
-                        <span className="white bg-theme p-1 px-2 rounded">{Moment(value.date).format('DD/MMM/YY')}</span>
+                        <span className="white bg-theme p-1 px-2 rounded">{Moment(value.date).format('DD/MMM/YY')}</span> */}
                       </div>
                       <div className="color-overlay" />
                     </div>
@@ -83,11 +84,12 @@ export const EventList = (props : EventProps) =>{
             })}
 
             
-
+          
 
             
           </div>
-        </div>
+          
+        </div>}
       </section>  
     </>
   )

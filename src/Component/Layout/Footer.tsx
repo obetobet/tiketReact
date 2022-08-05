@@ -24,7 +24,11 @@ type FooterProps = {
 }
 export const Footer =( props : FooterProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
+  const [isLoading,setisLoading]=React.useState(true);
 
+  setTimeout( () => {
+    setisLoading(false)
+  }, 700);
   return (
     <>  
   <footer className="pt-20 pb-4"

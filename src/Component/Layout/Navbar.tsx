@@ -13,6 +13,8 @@ type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
     logo?: string;
+    Loading?:boolean;
+    
   }
 
 export const Navbarx =( props : NavbarProps) =>{
@@ -21,9 +23,9 @@ export const Navbarx =( props : NavbarProps) =>{
     const { language } = useSelector((state: RootState) => state.lang);
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
-    const dropdownEl = useRef<HTMLUListElement>(null);
     const [show,setShow]=useState(false);
     const [userReady,setuserReady]=useState(false);
+    const [isLoading,setisLoading]=useState(true);
 
     const chooseLanguageHandler = (value: string) => {
         setShowDropdown(false);
@@ -31,11 +33,15 @@ export const Navbarx =( props : NavbarProps) =>{
         dispatch(setLanguage(value));
         navigate(location.pathname, { replace: true });
       }
-
+    
+    setTimeout( () => {
+        setisLoading(false)
+      }, 700);
     const currentUser = AuthService.getCurrentUser();
  
   return (  
     <>
+    {(isLoading) ? <p style={{height:"90px"}}></p>:
     <header className="main_header_area">
     <div className="header_menu" id="header_menu">
         <nav className="navbar navbar-default" >
@@ -45,7 +51,6 @@ export const Navbarx =( props : NavbarProps) =>{
                     <Link className="navbar-brand" to='/'>
                     <LazyLoadImage
                         alt='logo'
-                        effect="blur"
                         src={props.logo} />   
                     </Link>
                 </div>
@@ -143,8 +148,8 @@ export const Navbarx =( props : NavbarProps) =>{
             </div>
         </nav>
     </div>
-</header>
-
+    </header>
+    }
   </>
   );
  }

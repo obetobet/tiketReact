@@ -22,6 +22,7 @@ interface IProps {}
 interface IState {
   website: WebsiteModel;
   params : any;
+  isLoading : boolean;
 }
 
 
@@ -32,6 +33,7 @@ export default class App extends React.Component<IProps, IState> {
 
     this.state = {
         params: '',
+        isLoading:true,
         website: {
             Title: '',      
             Email: '',
@@ -54,7 +56,7 @@ export default class App extends React.Component<IProps, IState> {
         (rp) => {
             if (rp.Status) {
                 const website = rp.Data;  
-                this.setState({website: new WebsiteModel(website._id, website.webiste, website.email, website.telp, website.alamat,website.logo,website.favicon,website.facebook,website.twitter,website.instagram,website.youtube)});
+                this.setState({isLoading:false, website: new WebsiteModel(website._id, website.webiste, website.email, website.telp, website.alamat,website.logo,website.favicon,website.facebook,website.twitter,website.instagram,website.youtube)});
             } else {
                 toastr.error(rp.Messages);
                 console.log("Messages: " + rp.Messages);
@@ -73,11 +75,11 @@ export default class App extends React.Component<IProps, IState> {
   render () {
   return (
       <div>
-      <Online>
+      {/* <Online> */}
       <Favicon url={"" +this.state.website.Favicon}/>
         <BrowserRouter>
           
-          <Navbarx logo={this.state.website.Logo}/>
+          <Navbarx logo={this.state.website.Logo} Loading={this.state.isLoading}/>
           <ScrollToTop />
             <Routes >
                 <Route path="/" element={<HomeIndex/>}></Route>
@@ -105,8 +107,8 @@ export default class App extends React.Component<IProps, IState> {
           logo={this.state.website.Logo} 
           alamat={this.state.website.Alamat} />
         </BrowserRouter>
-      </Online>
-      <Offline>You're offline right now. Check your connection.</Offline>
+      {/* </Online> */}
+      {/* <Offline>You're offline right now. Check your connection.</Offline> */}
     </div>
   );
 }

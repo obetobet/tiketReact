@@ -8,7 +8,7 @@ type CardProps = {
 
 export const SkeletonCardArtikelHome = (props : CardProps) => {
     return <div className='row'> {Array.from(Array(3), (e, i) => {
-        return  <div className="col-lg-4">
+        return  <div className="col-lg-4" key={i}>
                 <div className='row'>
                     <div className="col-lg-12">
                         <Skeleton  height={220}/>
@@ -43,6 +43,19 @@ export const SkeletonCardArtikelHome = (props : CardProps) => {
 
         
        
+
+}
+
+
+export const SkeletonHome = () => {
+   
+        return   <div className='row'>
+                    <div className="col-lg-12">
+                        <Skeleton  height={520}/>
+                    </div>
+                </div>
+               
+        
 
 }
 

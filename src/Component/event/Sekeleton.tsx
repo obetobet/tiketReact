@@ -7,12 +7,9 @@ type CardProps = {
 }
 
 export const SkeletonCardEventHome = (props : CardProps) => {
-    const myArray = ['Ranjeet', 'Adil', 'Preet'];  
-
-
   
     return <div className='row'> {Array.from(Array(props.Cards), (e, i) => {
-        return  <div className="col-lg-4">
+        return  <div className="col-lg-4" key={i}>
                 <div className='row'>
                     <div className="col-lg-1">
                     </div>
@@ -175,6 +172,36 @@ export const SkeletonCardEventDetails = () => {
             </div>
         </div>     
     );
+    
+
+}
+
+
+export const SkeletonEventList = (props : CardProps) => {
+    
+    return <div className='container'> 
+            <div className='row'> 
+                <div className="col-lg-4">
+                
+                </div> 
+                <div className="col-lg-4">
+                <Skeleton height={40}/>
+                </div>
+                <div className="col-lg-4">
+                
+                </div><br/>   
+            
+            </div><br/>
+            <div className='row'>
+        {Array.from(Array(props.Cards), (e, i) => {
+
+     return   <div className="col-lg-3 col-md-6 col-sm-6 mb-3">
+                <Skeleton height={300}/>
+            </div>
+    
+        })}  
+    </div>
+    </div> 
     
 
 }
