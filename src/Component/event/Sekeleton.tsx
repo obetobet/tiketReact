@@ -195,8 +195,8 @@ export const SkeletonEventList = (props : CardProps) => {
             <div className='row'>
         {Array.from(Array(props.Cards), (e, i) => {
 
-     return   <div className="col-lg-3 col-md-6 col-sm-6 mb-3">
-                <Skeleton height={300}/>
+     return   <div className="col-lg-3 col-md-6 col-sm-6 mb-3" key={i}>
+                <Skeleton height={300} count={5}/>
             </div>
     
         })}  

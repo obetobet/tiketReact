@@ -12,7 +12,7 @@ const SkeletonCard = () => {
             </div>
             <div className='row'>
                 <div className="col-lg-6">
-                    <Skeleton width={550} height={50}/>
+                    <Skeleton  height={50}/>
                 </div>
             </div>
             <div className='row'>

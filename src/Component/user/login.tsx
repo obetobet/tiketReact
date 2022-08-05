@@ -2,7 +2,6 @@ import { Component } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AuthService from "../../service/auth.service";
-import { RouteComponentProps,} from '@reach/router';
 import Response from "../../models/response";
 import axios from "axios";
 import { useParams,useLocation,useNavigate } from 'react-router-dom';

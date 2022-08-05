@@ -1,6 +1,5 @@
 
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-// import { useApiGet, TApiResponse } from '../../hooks/getapi';
 import React, { useState, useEffect } from "react";
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';
@@ -14,7 +13,7 @@ type EventProps = {
   title : string
   judul : string
 }
-export const EventList = (props : EventProps) =>{
+ const EventList = (props : EventProps) =>{
   const { language } = useSelector((state: RootState) => state.lang);
 
   const [result, setResult] = useState([]);
@@ -94,3 +93,5 @@ export const EventList = (props : EventProps) =>{
     </>
   )
 }
+
+export default EventList;

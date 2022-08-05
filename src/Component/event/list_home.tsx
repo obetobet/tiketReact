@@ -18,7 +18,10 @@ interface IState {
   iscount:number;
 }
 
-class EventList extends React.Component<IProps, IState>  {
+const EventList = React.memo(class EventList extends React.Component<IProps, IState>   {
+  
+
+// class EventList extends React.Component<IProps, IState>  {
   
     public state: IState = {
         list: new Array<EventModel>(),
@@ -42,6 +45,8 @@ class EventList extends React.Component<IProps, IState>  {
 
         };
       }
+
+      
       
       public componentDidMount() {
         BaseService.getAll<EventModel>("/event/?limit=6&offset=1/").then((rp) => {
@@ -81,10 +86,10 @@ class EventList extends React.Component<IProps, IState>  {
                         <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="item-inner-image text-start">
                             <Link to={"/event/detail/" + object.Id} >
-                              <img alt={object.Title} src={object.Image}/>
-                              {/* <LazyLoadImage   alt={object.Title}
+                              {/* <img alt={object.Title} src={object.Image}/> */}
+                              <LazyLoadImage   alt={object.Title}
                                 effect="blur"
-                                src={object.Image} /> */}
+                                src={object.Image} />
                             </Link>
                             <h5 className="mb-0 text-center" style={{padding:"15px"}}>{object.Title}</h5>
                             </div>
@@ -128,7 +133,7 @@ class EventList extends React.Component<IProps, IState>  {
       };
 
     render (){
-     
+      memoize({ ttl: 10 * 60 * 1000 })
     return (
         <>
         <section className="trending pt-6 pb-0 bg-lgrey">
@@ -148,6 +153,6 @@ class EventList extends React.Component<IProps, IState>  {
         </>
     );
 }
-}
+});
 
 export default EventList;

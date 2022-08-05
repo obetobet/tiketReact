@@ -1,23 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC,Suspense } from 'react';
 import { BrowserRouter, Routes , Route,useParams } from 'react-router-dom';
-import About from './Component/about/about';
-import HomeIndex from './Component/home/home';
-import {EventList} from './Component/event/list';
-import BlogList from './Component/blog/list';
-import { Faq } from './Component/helps/Faq';
-import { Contact_us } from './Component/helps/Contact_us';
 import ScrollToTop from './Component/helpers/ScrollToTop';
-import { Error404 } from './Component/helps/Error_404';
 import { Offline, Online } from "react-detect-offline";
 import WebsiteModel from './models/webiste';
 import BaseService from './service/service';
 import Navbarx from './Component/Layout/Navbar';
 import Footer from './Component/Layout/Footer';
-import ArtikelDetail from './Component/artikel/artikel_detail';
 import Favicon from 'react-favicon'
-import { Profile } from './Component/user/profile';
 import {Order} from './Component/blog/blog_detail';
-import EventDetail from './Component/event/detail';
 interface IProps {}
 interface IState {
   website: WebsiteModel;
@@ -25,7 +15,16 @@ interface IState {
   isLoading : boolean;
 }
 
-
+const About = React.lazy(() => import('./Component/about/about'));
+const HomeIndex = React.lazy(() => import('./Component/home/home'));
+const BlogList = React.lazy(() => import('./Component/blog/list'));
+const ArtikelDetail = React.lazy(() => import('./Component/artikel/artikel_detail'));
+const EventDetail = React.lazy(() => import('./Component/about/about'));
+const Profile = React.lazy(() => import('./Component/user/profile'));
+const Faq = React.lazy(() => import('./Component/helps/Faq'));
+const Contact_us = React.lazy(() => import('./Component/helps/Contact_us'));
+const Error404 = React.lazy(() => import('./Component/helps/Error_404'));
+const EventList = React.lazy(() => import('./Component/event/list'));
 export default class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
 
@@ -81,6 +80,7 @@ export default class App extends React.Component<IProps, IState> {
           
           <Navbarx logo={this.state.website.Logo} Loading={this.state.isLoading}/>
           <ScrollToTop />
+          <Suspense >
             <Routes >
                 <Route path="/" element={<HomeIndex/>}></Route>
                 <Route path="/about-us" element={<About/>}></Route>
@@ -96,6 +96,7 @@ export default class App extends React.Component<IProps, IState> {
                 }
                
             </Routes >
+          </Suspense>
           <Footer 
           facebook={this.state.website.Facebook}
           twitter={this.state.website.Twitter}

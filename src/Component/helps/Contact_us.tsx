@@ -1,5 +1,5 @@
 
-export const Contact_us = () => {
+ const Contact_us = () => {
     return (
         <>
         <section className="contact-main pt-6 pb-60">
@@ -92,3 +92,5 @@ export const Contact_us = () => {
         </>
     )
 }
+
+export default Contact_us;

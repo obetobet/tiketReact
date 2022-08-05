@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Artikel from './artikel';
+import React, { useState, useEffect,Suspense  } from "react";
 import {Swiper,  SwiperSlide,useSwiper } from 'swiper/react';
 import { Navigation,A11y,Autoplay  } from 'swiper';
 import 'swiper/css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import EventList from "../event/list_home"
-import Partner from "./partner";
 import { memoize } from "memoize-cache-decorator";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { SkeletonHome } from "./Sekeleton";
@@ -15,9 +12,12 @@ type resultProps = {
     gambar:string;
     slug:string;
   };
+const EventList = React.lazy(() => import('../event/list_home'));
+const Artikel = React.lazy(() => import('./artikel'));
+const Partner = React.lazy(() => import('./partner'));
 const HomeIndex: React.FC = React.memo(props => {
-    memoize()
-    const swiperx = useSwiper();
+    memoize({ ttl: 10 * 60 * 1000 })
+    
     const navigationPrevRef = React.useRef<HTMLDivElement>(null)
     const navigationNextRef = React.useRef<HTMLDivElement>(null)
 
@@ -80,7 +80,7 @@ const HomeIndex: React.FC = React.memo(props => {
                                     
                                     <div className="swiper-slide" >
                                         <div className="slide-inner" >
-                                        <img className="slide-image img-fluid" alt={object.title}  src={object.gambar}/>
+                                        <LazyLoadImage  className="slide-image img-fluid" alt={object.title}  src={object.gambar}/>
                                             <div className="dot-overlay" />
                                         </div>
                                     </div>
@@ -100,9 +100,12 @@ const HomeIndex: React.FC = React.memo(props => {
                 </div>
                 }
             </section>
-            <EventList/>
-            <Artikel/>
-            <Partner/>
+            <Suspense >
+              <EventList />
+              <Artikel/>
+              <Partner/>
+            </Suspense>
+            
         </>
         )
     

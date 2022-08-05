@@ -6,7 +6,10 @@
       "dom.iterable",
       "esnext"
     ],
-    
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+
+    "sourceMap": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

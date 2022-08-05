@@ -16,7 +16,7 @@ type Profilprops = {
   // address? : any
 }
 
-export const Profile  = (props : any) => {
+ const Profile  = (props : any) => {
     const { language } = useSelector((state: RootState) => state.lang);
     const [first_name, setfirst_name] = useState()
     const [last_name, setlast_name]= useState()
@@ -224,3 +224,5 @@ export const Profile  = (props : any) => {
         </>
     )
 }
+
+export default Profile;

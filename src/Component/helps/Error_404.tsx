@@ -1,6 +1,6 @@
 
 
-export const Error404 = () => {
+ const Error404 = () => {
     return (
         <>
         <section className="error overflow-hidden pb-10 pt-20">
@@ -34,3 +34,5 @@ export const Error404 = () => {
         </>
     )
 }
+
+export default Error404;

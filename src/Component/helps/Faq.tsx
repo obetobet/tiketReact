@@ -2,7 +2,7 @@
 import { translate } from '../../i18n';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-export const Faq = () => {
+ const Faq = () => {
     const { language } = useSelector((state: RootState) => state.lang);
     return (
         <>
@@ -189,3 +189,5 @@ export const Faq = () => {
         </>
     )
 }
+
+export default Faq;

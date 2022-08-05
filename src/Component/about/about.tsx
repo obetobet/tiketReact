@@ -1,8 +1,4 @@
 import React from "react";
-import { translate } from '../../i18n';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import Testimonails from './testimonial';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AboutModel from "../../models/about";
 import * as toastr from 'toastr';

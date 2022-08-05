@@ -8,7 +8,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import AuthService from "../../service/auth.service";
 import { useLocation,useNavigate } from 'react-router-dom';
-import { FaSignInAlt,FaRegUser } from "react-icons/fa";
 type NavbarProps = {
     fixed?: boolean;
     transparent?: boolean;
@@ -48,7 +47,8 @@ export const Navbarx =( props : NavbarProps) =>{
             <div className="container">
                 <div className="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
                 <div className="navbar-header">
-                    <Link className="navbar-brand" to='/'>
+                    <Link  className="navbar-brand" to='/'>
+                    {/* <link rel="preload" as="image" href="/path/to/hero-image.webp" type="image/webp"> */}
                     <LazyLoadImage
                         alt='logo'
                         src={props.logo} />   

@@ -51,7 +51,7 @@ export const SkeletonHome = () => {
    
         return   <div className='row'>
                     <div className="col-lg-12">
-                        <Skeleton  height={520}/>
+                        <Skeleton  height={320}/>
                     </div>
                 </div>
                

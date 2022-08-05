@@ -1,8 +1,7 @@
 import BaseService from "../../service/service";
-import * as toastr from "toastr";
 import KategoriModel from "../../models/kategori"
 import * as React from "react";
-
+import { Link,NavLink  } from 'react-router-dom';
 interface IProps {}
 interface IState {
   list: Array<KategoriModel>;
@@ -50,7 +49,7 @@ class Kategori extends React.Component<IProps, IState> {
     public tabRow = () => {
 
         return this.state.list.map(function (object, i) {
-          return  <li key={i}><a href="">{object.Title}</a></li>
+          return  <li key={i}><Link to='/'>{object.Title}</Link></li>
         });
       };
 
